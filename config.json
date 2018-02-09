@@ -1,0 +1,8 @@
+{
+  "DB":{
+    "NAME":"testdb",
+    "USERNAME":"testuser3",
+    "PASSWORD":"pass",
+    "HOST":"localhost"
+  }
+}
