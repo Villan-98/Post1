@@ -1,7 +1,4 @@
 const User=require('../db/models').User
-const route=require('express')
-
-
 exports=module.exports= {
     add_user:(reqQuery)=> {
 
@@ -10,5 +7,14 @@ exports=module.exports= {
             password: reqQuery.password
         })
     },
+    validate_user:async(reqQuery)=>{
+       return User.findOne({
+            where:id=parseInt(reqQuery.userId)
+        })
+    },
+    getallUser:async(reqQuery)=>{
+       return User.findAll()
+
+    }
 
 }

@@ -43,5 +43,15 @@ route.post('/signin',(r,s)=>{
             console.log(err)
         })*/
 })
+route.get('/',(r,s)=>{
+    ctrl.validate_user(r.query)
+        .then((user)=>{
+            console.log("user is"+user)
+            s.status(500).json({user})
 
+        })
+        .catch((err)=>{
+            s.status(500).json({message:err})
+        })
+})
 exports=module.exports=route

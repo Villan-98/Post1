@@ -76,15 +76,44 @@ const Post=db.define('post',{
       allowNull:false
     }
 })
-Post.belongsTo(User)
+const Like=db.define('likes',{
 
+    value:{
+
+        type:DataTypes.SMALLINT,
+        allowNull:false
+    },
+
+
+},{
+    timestamps:false
+})
+Like.removeAttribute('id')
+Post.belongsTo(User)
+Like.belongsTo(User,{foreignKey:{
+        name:'User_key',
+        allowNull:false,
+        defaultValue:0,
+        primaryKey:true,
+
+    }
+})
+Like.belongsTo(Post,{foreignKey:{
+        name:'Post_key',
+        allowNull:false,
+        defaultValue:1,
+        primaryKey:true
+    }
+})
 Cart.belongsTo(Product)
 Cart.belongsTo(User)
 Product.belongsTo(Category)
 //Product.belongsTo(Category)
-db.sync({})
+db.sync({
+    alter:true
+})
     .then(()=>{console.log("database syncronised")})
 exports=module.exports={
-    db,Category,Product,Cart,User,Post
+    db,Category,Product,Cart,User,Post,Like
 
 }
