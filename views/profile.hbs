@@ -29,43 +29,61 @@
             <div class="col-8 text-center">
                 <div>
 
-                    <h2 class="bg-light py-3">Profile</h2>
+                    <h2 class="bg-light py-3">Edit Profile</h2>
                 </div>
-                <div class="py-5">
-                    <p>Hi,{{posts.UserName}}</p>
-                    <div>
-                        UserName:
-                    </div>
-                    <div>
-                        College:
-                    </div>
-                    <div>
-                        Achievements:
-                    </div>
-                    <form>
-                        <div class="form-row">
+                <div class="jumbotron pt-4">
+
+                    <form action="/user/profile" method="post" >
+
+
+                        <div class="row">
+
                             <div class="form-group col-md-6">
-                                <label for="inputEmail4">Email</label>
-                                <input type="email" class="form-control" id="inputEmail4" placeholder="Email">
+                                <label for="exampleFormControlFile1" >name</label>
+                                <input type="text" name="name" class="form-control" id="name" value="{{user.name}}">
                             </div>
                             <div class="form-group col-md-6">
-                                <label for="inputPassword4">Password</label>
-                                <input type="password" class="form-control" id="inputPassword4" placeholder="Password">
+                                <label for="username" >Username</label>
+                                <input type="text" name="username" class="form-control" id="username" value="{{user.username}}">
                             </div>
+
                         </div>
-                        <div class="form-group">
-                            <label for="username">User Name</label>
-                            <input type="text" class="form-control" id="username" placeholder="1234 Main St">
+                        <div class="form-group col-md-12">
+                            <label for="college" >College Name</label>
+                            <input type="text" name="college" class="form-control" id="college" value="{{user.college}}">
+                        </div>
+                        {{#if user.success}}
+                        {{else}}
+                            <div class="alert alert-danger" role="alert">
+                                {{user.status}}
+                            </div>
+                        {{/if}}
+                        <div class="row">
+
+                            <div class="form-group col-md-4">
+                                <label for="oldP" >Old Password</label>
+                                <input type="password" name="old_pass" class="form-control" id="oldP" >
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label for="newP" >New Password</label>
+                                <input type="password" name="new_pass" class="form-control" id="newP" >
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label for="confP" >Confirm Password</label>
+                                <input type="password" name="conf_pass" class="form-control" id="confP">
+                            </div>
                         </div>
 
-                        <div class="form-group ">
-                            <label for="inputState">College</label>
-                            <select id="inputState" class="form-control">
-                                <option selected>Choose...</option>
-                                <option>...</option>
-                            </select>
+                        <div class="form-group">
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" name="changeP"id="checkchange">
+                                <label class="form-check-label" for="checkchange">
+                                    Check it if you want to change password
+                                </label>
+                            </div>
                         </div>
-                        <button type="submit" class="btn btn-primary">Sign in</button>
+
+                            <button type="submit" class="btn btn-primary px-4 ">Pos Pict</button>
                     </form>
                 </div>
             </div>

@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="/js/jquery-3.2.1.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <script src="/js/post.js"></script>
+    <title>home</title>
+</head>
+<body>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-2 btn-light">
+                <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+                    <a class="nav-link active" id="v-pills-home-tab" data-toggle="pill" href="#v-pills-home" role="tab" aria-controls="v-pills-home" aria-selected="true">Home</a>
+                    <a class="nav-link" id="v-pills-profile-tab" data-toggle="pill" href="https://www.geeksforgeeks.org" role="tab" aria-controls="v-pills-profile" aria-selected="false">Posts</a>
+                    <a class="nav-link" id="v-pills-messages-tab" data-toggle="pill" href="#v-pills-messages" role="tab" aria-controls="v-pills-messages" aria-selected="false">Achievements</a>
+                    <a class="nav-link" id="v-pills-settings-tab" data-toggle="pill" href="#v-pills-settings" role="tab" aria-controls="v-pills-settings" aria-selected="false">Edit Profile</a>
+                </div>
+                <div class="tab-content" id="v-pills-tabContent">
+                    <div class="tab-pane fade show active" id="v-pills-home" role="tabpanel" aria-labelledby="v-pills-home-tab">...</div>
+                    <div class="tab-pane fade" id="v-pills-profile" role="tabpanel" aria-labelledby="v-pills-profile-tab">...</div>
+                    <div class="tab-pane fade" id="v-pills-messages" role="tabpanel" aria-labelledby="v-pills-messages-tab">...</div>
+                    <div class="tab-pane fade" id="v-pills-settings" role="tabpanel" aria-labelledby="v-pills-settings-tab">...</div>
+                </div>
+            </div>
+            <div class="col" style="float:left;width:1000px;overflow-y: auto;height: 800px;">
+
+                <div class="row">
+                    <div clss="col-2">
+                        <p>Hi,{{posts.UserName}}</p>
+                    </div>
+                    <div class="col float-right">
+                        <a  class="primary float-right" href="http://localhost:2400/user/Mypost"style="font-size:15px;background-color:whitesmoke" >Profile</a>
+                    </div>
+                </div>
+                <form action="/post" method="post">
+                    <div class="form-group">
+                        <div class="my-2">
+
+                            <textarea class="form-control" name="text" placeholder="What's on your Mind" rows="3"></textarea>
+
+                        </div>
+                        <div>
+                          <!--  <input type="hidden" name="userId" value="{{posts.UserId}}">-->
+                        </div>
+                        <div>
+                            <button type="submit" class="btn btn-primary px-4 ">Post</button>
+                            <!--
+                    {{#if posts.active}}
+                        <button type="submit" class="btn btn-primary px-4 ">Post</button>
+                    {{else}}
+                        <button type="submit" class="btn btn-primary px-4 disabled" disabled>Post</button>
+                    {{/if}}
+-->
+                        </div>
+                    </div>
+                </form>
+                <form action="/post" method="post" enctype="multipart/form-data">
+
+                    <div class="form-group">
+                        <div class="row" style="border: solid #c8cbcf;border-width: thin;border-radius: 5px">
+
+                            <div class="col-3 py-2 ">
+                                <label for="file" class="btn btn-light px-4 py-4git status">Choose Images</label>
+                                <input type="file" id="file" name="Mypost" class="form-control-file py-4 bg-light"style=" display: none;border: solid #c8cbcf;border-width: thin;border-radius: 5px">
+                            </div>
+                            <div class="col-3 my-4">
+                                <button type="submit" class="btn btn-primary px-4 py-2">Upload</button>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <!--
+                    {{#if posts.active}}
+                        <button type="submit" class="btn btn-primary px-4 ">Post</button>
+                    {{else}}
+                        <button type="submit" class="btn btn-primary px-4 disabled" disabled>Post</button>
+                    {{/if}}
+-->
+                </form>
+                {{#each posts as |post|}}
+                     <div class="bg-light py-2 px-2 my-2" style="">
+                        <div class="bg-white">
+                            {{post.user.name}}
+                        </div>
+                         {{#if post.pic}}
+                             <div>
+                                 <img src='/upload/{{post.address}}' >
+                             </div>
+                        {{else}}
+                            <div >
+                                {{post.text}}
+                            </div>
+                        {{/if}}
+                        <div class="row mt-3">
+                            <div class="col-lg-1 col-sm-2" id="L{{post.id}}">
+                                {{#if post.likes.0.value}}
+
+                                     <i class="fa fa-thumbs-up" onclick="like_post({{post.id}},-1,{{post.vote}},0)" style="font-size: 36px" aria-hidden="true">{{post.likes.value}}</i>
+
+                                {{else}}
+                                    <i class="fa fa-thumbs-o-up" onclick="like_post({{post.id}},1,{{post.vote}},1)" style="font-size: 36px" aria-hidden="true"></i>
+                                {{/if}}
+                            </div>
+                            <div class="col-lg-1 col-sm-2" id="D{{post.id}}">
+                                {{#if post.dislikes.0.value}}
+                                    <i class="fa fa-thumbs-down"onclick="like_post({{post.id}},1,{{post.vote}},0)" style="font-size:36px"aria-hidden="true"></i>
+                                {{else}}
+                                    <i class="fa fa-thumbs-o-down"onclick="like_post({{post.id}},-1,{{post.vote}},1)" style="font-size:36px"aria-hidden="true"></i>
+                                {{/if}}
+                            </div>
+
+                            <div id="V{{post.id}}" class="col-1">
+                                <div>
+                                    {{post.vote}}
+                                </div>
+                            </div>
+                            <div class="col">
+                                <button class="btn btn-light" type="button" id="b{{post.id}}" onclick="fetch_comment({{post.id}})"  data-toggle="collapse" data-target="#{{post.id}}" aria-expanded="false" aria-controls="collapseExample">
+                                    Comment
+                                </button>
+                            </div>
+                        </div>
+                            <div class="collapse" id="{{post.id}}">
+                                <div class="card card-body">
+                                    <div class="row">
+                                        <div class="col">
+                                            <form action="/post/comment" method="post">
+                                                <div class="form-group">
+                                                    <div class="row">
+                                                        <div class="col-8">
+                                                            <textarea class="form-control" name="text" placeholder="Write Your comment here" rows="1"></textarea>
+                                                        </div>
+                                                        <div class="col-1">
+                                                            <input type="hidden" name="postId" value="{{post.id}}">
+                                                        </div>
+                                                        <div class="col-1">
+                                                            <input type="hidden" name="userId" value="{{../posts.UserId}}">
+                                                        </div>
+                                                        <div class="col-2">
+                                                            <button type="submit" class="btn btn-primary px-4 ">Send</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </form>
+                                            <div class="row">
+                                                <div id="C{{post.id}}" class="col testing">
+                                            </div >
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                     </div>
+                {{/each}}
+            </div>
+
+        </div>
+    </div>
+</body>
+</html>

@@ -10,25 +10,6 @@ const db=new Sequelize(
         dialect:'mysql'
     }
 )
-const Category=db.define('category',{
-    name:{
-        type:DataTypes.STRING,
-        allowNULL:false
-    },
-    tax_perc:{
-        type:DataTypes.FLOAT,
-        defaultValue:0
-    }
-})
-const Cart=db.define('cart',{
-
-    quantity: {
-        type:DataTypes.SMALLINT,
-        defaultValue:1,
-        allowNULL:false
-    },
-
-})
 const User=db.define('user',{
     name:{
         type:DataTypes.STRING
@@ -41,31 +22,20 @@ const User=db.define('user',{
     },
     password:{
         type:DataTypes.STRING
+    },
+    college:{
+        type:DataTypes.STRING,
+        defaultValue:"DTU"
+    },
+    rights:{
+        type:DataTypes.STRING,
+        defaultValue:"you can only send one post"
     }
-})
-const Product=db.define('product_a',{
-    name:{
-        type:DataTypes.STRING,
-        allowNULL:false
-    },
-
-    vendor: {
-        type: DataTypes.STRING,
-        allowNull: false
-    },
-    price:{
-        type:DataTypes.FLOAT,
-        defaultValue:0
-    },
-    /*categoryId:{
-        type:DataTypes.STRING,
-        defaultValue:null
-    }*/
 })
 const Post=db.define('post',{
     text:{
         type:DataTypes.STRING,
-        allowNull:false
+
     },
     vote:{
         type:DataTypes.SMALLINT,
@@ -74,8 +44,18 @@ const Post=db.define('post',{
     clgId:{
       type:DataTypes.SMALLINT,
       allowNull:false
+    },
+    pic:{
+        type:DataTypes.BOOLEAN,
+        defaultValue:0
+    },
+    address:{
+        type:DataTypes.STRING
     }
+
 })
+Post.belongsTo(User)
+
 const Like=db.define('likes',{
 
     value:{
@@ -88,8 +68,8 @@ const Like=db.define('likes',{
 },{
     timestamps:false
 })
+
 Like.removeAttribute('id')
-Post.belongsTo(User)
 Like.belongsTo(User,{foreignKey:{
         name:'User_key',
         allowNull:false,
@@ -98,22 +78,65 @@ Like.belongsTo(User,{foreignKey:{
 
     }
 })
-Like.belongsTo(Post,{foreignKey:{
+
+Post.hasMany(Like,{foreignKey:{
         name:'Post_key',
         allowNull:false,
         defaultValue:1,
         primaryKey:true
     }
 })
-Cart.belongsTo(Product)
-Cart.belongsTo(User)
-Product.belongsTo(Category)
-//Product.belongsTo(Category)
+
+const Dislike=db.define('dislikes',{
+
+    value:{
+
+        type:DataTypes.SMALLINT,
+        allowNull:false
+    },
+
+
+},{
+    timestamps:false
+})
+
+Dislike.removeAttribute('id')
+Dislike.belongsTo(User,{foreignKey:{
+        name:'User_key',
+        allowNull:false,
+        defaultValue:0,
+        primaryKey:true,
+
+    }
+})
+Post.hasMany(Dislike,{foreignKey:{
+        name:'Post_key',
+        allowNull:false,
+        defaultValue:1,
+        primaryKey:true
+    }
+})
+
+const Comment=db.define('comment',{
+    Ctext:{
+        type:DataTypes.STRING,
+        allowNull:false,
+    }
+})
+Post.hasMany(Comment,{foreignKey:{
+    name:'CPost_key',
+        allowNull:false
+
+    }})
+Comment.belongsTo(User,{foreignKey:{
+    name:'CUser_key',
+        allowNull:false
+    }})
 db.sync({
-    alter:true
+  // alter:true
 })
     .then(()=>{console.log("database syncronised")})
 exports=module.exports={
-    db,Category,Product,Cart,User,Post,Like
+    db,User,Post,Like,Dislike,Comment
 
 }
