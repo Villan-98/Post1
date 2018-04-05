@@ -1,6 +1,6 @@
 const route=require('express').Router()
 const ctrl=require('../controllers/posts')
-const chk=require("./achievements")
+const chk=require("../controllers/achievements")
 const path=require('path')
 const multer=require('multer')
 const ctrlComment=require('../controllers/comment')

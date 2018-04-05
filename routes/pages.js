@@ -1,8 +1,9 @@
 const route=require('express').Router()
 const ctrl_user=require('../controllers/user')
 const ctrl_post=require('../controllers/posts')
+const ctrl_achieve=require('../controllers/achievements')
 const liked_post=require('../controllers/like')
-const chk=require('./achievements')
+const chk=require('../controllers/achievements')
 function ActivePostButton(req,res,next){
         ctrl_post.getpost(req.user)
         .then((post)=>{
@@ -65,7 +66,7 @@ route.get('/MyPost',ActivePostButton,(req,res)=>{
     console.log("req user is "+req.user.name)
     ctrl_post.getpost(req.user)
         .then((posts)=>{
-            chk.achieved(posts)
+           // chk.achieved(posts)
 
           //  chk.leader()
             console.log("reched in post &")
@@ -97,6 +98,19 @@ route.get('/profile',(req,res)=>{
 
 
 
+    }
+})
+route.get('/achievement',(req,res)=>{
+    if(!req.user){
+        res.redirect('/login/signin')
+    }
+    else{
+        ctrl_achieve.getHVPost(req.user)
+            .then((data)=>{
+                res.render('achievement',{data})
+
+            }
+        )
     }
 })
 route.post('/profile',(req,res)=>{

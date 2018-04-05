@@ -4,7 +4,8 @@ exports=module.exports= {
 
         return User.create({
             name: reqQuery.name,
-            password: reqQuery.password
+            password: reqQuery.password,
+            email:reqQuery.email
         })
     },
     validate_user:async(reqQuery)=>{
@@ -21,6 +22,14 @@ exports=module.exports= {
         return User.findOne({
             where:{
                 id:parseInt(reqQuery.id)
+            }
+        })
+    },
+    check_email:async(reqQuery)=>{
+        console.log("entered in validate user")
+        return User.findOne({
+            where:{
+                email:reqQuery.email
             }
         })
     },

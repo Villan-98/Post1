@@ -1,5 +1,5 @@
 const route=require('express').Router()
-const ctrl=require('../controllers/posts')
+const ctrl=require('../controllers/achievements')
 
 //const ctrl=require('../controllers/like')
 route.get('/abc',(req,res)=>{
@@ -14,14 +14,16 @@ route.get('/abc',(req,res)=>{
             console.log(err)
             res.status(404).json({err})
         })*/
-    ctrl.getallpost()
-        .then((data)=>{
 
-            res.status(201).json({data})
-        })
 
 })
 route.post('/abc',(req,res)=>{
-    res.send(req.body)
+    ctrl.getHVPost(req.body)
+        .then((data)=>{
+            res.send(data)
+            console.log("data"+data)
+            //res.status(201).json({data})
+        })
+    //res.send(req.body)
 })
 exports=module.exports=route

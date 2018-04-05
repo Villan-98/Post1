@@ -21,9 +21,11 @@ app.use('/',express.static(path.join(__dirname,'public')))
 app.use('/login',require('./routes/user'))
 app.use('/login1',require('./routes/user1'))
 app.use('/user', require('./routes/pages'))
+
 app.use('/post',require('./routes/posts'))
 app.use('/like',require('./routes/like'))
 app.use('/test',require('./routes/test'))
+
 app.listen(2400,()=>{
     console.log("listening to port 2400")
 })

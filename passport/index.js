@@ -1,5 +1,6 @@
 const passport=require('passport')
 const strategies=require('./strategies')
+const google=require('./google_strategies')
 const User=require('../db/models').User
 passport.use(strategies.localStrategy)
 passport.serializeUser(function(user,done){

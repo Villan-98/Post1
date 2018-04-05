@@ -24,13 +24,42 @@ route.get('/signup',(req,res)=>{
     res.render('signup')
     })
 route.post('/signup',(req,res)=>{
-    ctrl.add_user(req.body)
-        .then((user)=>{
-            res.redirect('/login/signin')
-        })
-        .catch((err)=>{
-            console.log(err);
-        })
+    var alert={}
+    console.log(req.body.email)
+    if(req.body.email==="")
+    {
+
+        alert['email']="enter the email address"
+        res.render('signup',{alert})
+    }else{
+
+        ctrl.check_email(req.body)
+            .then((data)=>{
+                console.log(data)
+                if(data){
+                    alert['email']="already a existing user through this mail"
+                    res.render('signup',{alert})
+                }
+                else{
+                    if(req.body.password===req.body.conf_password)
+                    {
+                        ctrl.add_user(req.body)
+                            .then((user)=>{
+                                res.redirect('/login/signin')
+                            })
+                            .catch((err)=>{
+                                console.log(err);
+                            })
+                    }
+                    else{
+
+                        alert['pass']="Password and Conf_password is not same"
+                        res.render('signup',{alert})
+                    }
+                }
+            })
+
+    }
 })
 route.get('/signin',(r,s)=>s.render('signin'))
 route.post('/signin',(r,s)=>{

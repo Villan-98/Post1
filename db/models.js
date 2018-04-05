@@ -17,7 +17,7 @@ const User=db.define('user',{
     username:{
         type:DataTypes.STRING,
     },
-    address:{
+    email:{
         type:DataTypes.STRING,
     },
     password:{
@@ -133,7 +133,7 @@ Comment.belongsTo(User,{foreignKey:{
         allowNull:false
     }})
 db.sync({
-  // alter:true
+  //force:true
 })
     .then(()=>{console.log("database syncronised")})
 exports=module.exports={
