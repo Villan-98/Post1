@@ -12,7 +12,8 @@ route.post('/',(req,res)=>{
                 ctrl.delete_dislike(req.body)
                     .then(()=>{
                          //   console.log("delete dislike done")
-                                                 }
+
+                        }
                     )
                     .catch((err)=>{
                         console.log(err)
@@ -46,6 +47,7 @@ route.post('/',(req,res)=>{
                 console.log(err)
                 res.status(500).json({message:err})
             })
+
     }
 })
 route.delete('/',(req,res)=>{

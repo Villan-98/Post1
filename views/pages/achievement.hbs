@@ -1,0 +1,50 @@
+
+
+            <div>
+
+                <h2 class="bg-light py-3">Achievement</h2>
+            </div>
+            <div class="jumbotron pt-4">
+                {{#if data}}
+                    <div class="row">
+                        <div class="col">
+                            Post :
+                        </div>
+                        {{#if data.pic}}
+
+                            <div class="col">
+                                <img src="/upload/{{data.address}}">
+                            </div>
+                        {{else}}
+                            <div class="col">
+                                {{data.text}}
+                            </div>
+                        {{/if}}
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            Votes on Post :
+                        </div>
+                        <div class="col">
+                            {{data.vote}}
+                        </div>
+                    </div><div class="row">
+                    <div class="col">
+                        Post Created on:
+                    </div>
+                    <div class="col">
+                        {{data.createdAt}}
+                    </div>
+                </div>
+                {{else}}
+
+                <div class="row">
+                    <div class="col alert-danger">
+                        Sorry , you have not send any post
+                    </div>
+                </div>
+                {{/if}}
+
+            </div>
+
+

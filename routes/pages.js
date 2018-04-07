@@ -43,14 +43,19 @@ route.get('/home',(req,res)=>{                             //active post button 
     }
     ctrl_post.getallpost(req.user)
         .then((posts)=>{
-            console.log(req.user.name)
-            console.log(req.user.id)
-            posts['UserId']=req.user.id
-            posts["UserName"]=req.user.name
-            posts['active']=req.active
-            console.log("active is "+req.active)
-            //res.status(201).json({posts})
-            res.render('abc',{posts})
+            ctrl_post.HVPost()
+                .then((data)=>{
+
+                    console.log(req.user.name)
+                    console.log(req.user.id)
+                    posts['UserId']=req.user.id
+                    posts["UserName"]=req.user.name
+                    posts['active']=req.active
+                    posts['hv_post']=data
+                    console.log("active is "+req.active)
+                    //res.status(201).json({posts})
+                    res.render('abc',{posts})
+                })
         })
         .catch((err)=>{
             res.status(200).json({message:"cannot fetch all post"})
@@ -76,7 +81,7 @@ route.get('/MyPost',ActivePostButton,(req,res)=>{
             posts['college']=req.user.college
             posts['rights']=req.user.rights
             //res.send(posts)
-             res.render('post',{posts})
+             res.render('post',{posts,layout:false})
         })
         .catch((err)=>{
             console.log("error detected")
@@ -94,7 +99,7 @@ route.get('/profile',(req,res)=>{
                 let user=req.user
                 //console.log("sjdfklsjfksljfl"+req.user.name)
                 //console.log("sdkjfklsdjfskljflsakfjdsal"+user)
-                res.render('profile',{user})
+                res.render('profile',{user,layout:false})
 
 
 
@@ -147,21 +152,21 @@ route.post('/profile',(req,res)=>{
 
                                 user['success']=0
                                 user['status']='Oops something went wrong. Please Retry!!!'
-                                res.render('profile',{user})
+                                res.render('profile',{user,layout:false})
                             }
                         )
                 }
                 else{
                     user['success']=0
                     user['status']='Password did not matched'
-                    res.render('profile',{user})
+                    res.render('profile',{user,layout:false})
                 }
             }
             else
             {
                 user['success']=0
                 user['status']='wrong input in confirm password'
-                res.render('profile',{user})
+                res.render('profile',{user,layout:false})
             }
 
         }

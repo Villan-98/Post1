@@ -16,11 +16,12 @@
 </head>
 <body>
 <div class="container "  >
+
     <div class="row">
         <div class="col-4">
 
         </div>
-        <div class=" bg-light col-3 " >
+        <div class=" bg-light col-5 " >
 
             <form action="/login1/signup" method="post">
                 <div class="form-group">
@@ -28,27 +29,27 @@
                     <input type="text" class="form-control" id="signup_user" placeholder="User Name" name="name">
                 </div>
 
-                {{#if alert.email}}
+                {{#if alert1}}
 
                     <div class="alert-danger">
-                        {{alert}}
+                        {{alert1}}
                     </div>
                 {{/if}}
                 <div class="form-group">
                     <label for="signup_email">Email Id</label>
-                    <input type="email" class="form-control" id="signup_email" placeholder="Password" name="email">
+                    <input type="email" class="form-control" id="signup_email" placeholder="Email Address" name="email">
                 </div>
-                {{#if alert.pass}}
-
-                    <div class="alert-danger">
-                        {{alert}}
-                    </div>
-                {{/if}}
                 <div class="form-group">
                     <label for="signup_pass">Password</label>
                     <input type="password" class="form-control" id="signup_pass" placeholder="Password" name="password">
                 </div>
 
+                {{#if alert2}}
+
+                    <div class="alert-danger">
+                        {{alert2}}
+                    </div>
+                {{/if}}
                 <div class="form-group">
                     <label for="signup_con_pass">Confirm Password</label>
                     <input type="password" class="form-control" id="signup_con_pass" placeholder="Password" name="conf_password">

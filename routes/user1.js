@@ -20,25 +20,24 @@ const ctrl=require('../controllers/user')
 //route.get('/profile',(r,s)=>s.render('profile'))
 route.get('/signup',(req,res)=>{
     console.log(req.params)
-    //res.status(201).json({req.})      what so i get when i donot pass any params in my get request
-    res.render('signup')
+    res.render('signup',{layout:false})
     })
 route.post('/signup',(req,res)=>{
-    var alert={}
+
     console.log(req.body.email)
     if(req.body.email==="")
     {
 
-        alert['email']="enter the email address"
-        res.render('signup',{alert})
+        let alert1="enter the email address"
+        res.render('signup',{alert1,layout:false})
     }else{
 
         ctrl.check_email(req.body)
             .then((data)=>{
                 console.log(data)
                 if(data){
-                    alert['email']="already a existing user through this mail"
-                    res.render('signup',{alert})
+                    let alert1="already a existing user through this mail"
+                    res.render('signup',{alert1,layout:false})
                 }
                 else{
                     if(req.body.password===req.body.conf_password)
@@ -53,15 +52,15 @@ route.post('/signup',(req,res)=>{
                     }
                     else{
 
-                        alert['pass']="Password and Conf_password is not same"
-                        res.render('signup',{alert})
+                        let alert2="Password and Conf_password is not same"
+                        res.render('signup',{alert2,layout:false})
                     }
                 }
             })
 
     }
 })
-route.get('/signin',(r,s)=>s.render('signin'))
+route.get('/signin',(r,s)=>s.render('signin',{layout:false}))
 route.post('/signin',(r,s)=>{
     s.redirect('/user/home?userid=12')
    // s.render('profile')

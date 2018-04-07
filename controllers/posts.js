@@ -157,11 +157,11 @@ exports=module.exports={
         })
     },
     HVPost:()=>{
-        return Post.findAll({
-            where:{
-                vote:Post.max('vote')
-            }
+        return Post.max('vote',{
+
+
         })
+
     },
     getOne:async(reqQuery)=>{
         return Post.findOne({

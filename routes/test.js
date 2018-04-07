@@ -1,8 +1,32 @@
 const route=require('express').Router()
 const ctrl=require('../controllers/achievements')
+const user=require('../controllers/user')
 
-//const ctrl=require('../controllers/like')
+const Post=require('../controllers/posts')
 route.get('/abc',(req,res)=>{
+    /*ctrl.get_tot_post(req.user)
+        .then((data)=>{
+        console.log(data)
+    })
+        .catch((err)=>{
+            console.log(err)
+        })
+    ctrl.get_tot_like(req.user)
+        .then((data)=>{
+
+            console.log(data)
+        })
+        .catch((err)=>{
+            console.log(err)
+        })
+    user.get_tot_user()
+        .then((data)=>{
+            console.log(data)
+        })
+    console.log("data is "+achv.ref_L_P)
+    res.send("hi")*/
+
+
     ///let abc=req.user;
     //res.status(201).json({abc})
     /*ctrl.getAll()

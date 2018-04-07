@@ -2,11 +2,11 @@ const route=require('express').Router()
 const User=require('../db/models').User
 const passport=require('../passport')
 route.get('/signin',(r,s)=>{
-    s.render('signin')
+    s.render('signin',{layout:false})
 })
 route.get('/signup',(r,s)=>{
 
-    s.render('signup')
+    s.render('signup',{layout:false})
 })
 route.post('/signin', passport.authenticate('local', {
     successRedirect: '/user/home',

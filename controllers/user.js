@@ -46,6 +46,10 @@ exports=module.exports= {
                 id:reqQuery.id
             }
          })
-    }
+    },
+    get_tot_user:async(reqQuery)=>{
+        return User.count({})
+
+}
 
 }

@@ -11,5 +11,20 @@ exports=module.exports={
            order:[['vote','DESC']]
 
         })
-}
+    },
+    get_tot_post:async(reqQuery)=>{
+        return Posts.count({
+            where:{
+                userId:1
+            }
+        })
+    },
+    get_tot_like:async(reqQuery)=>{
+        return Posts.sum('vote',{
+            where:{
+                userId:1
+            }
+        })
+
+    }
 }
