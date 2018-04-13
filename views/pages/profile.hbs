@@ -72,9 +72,12 @@
                         </div>
                         {{#if user.success}}
                         {{else}}
+                            {{#if user.status}}
+
                             <div class="alert alert-danger" role="alert">
                                 {{user.status}}
                             </div>
+                            {{/if}}
                         {{/if}}
                         <div class="row">
 

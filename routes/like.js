@@ -2,7 +2,7 @@ const route=require('express').Router()
 const ctrl=require('../controllers/like')
 route.post('/',(req,res)=>{
    //console.log("reachint to like post")
-    if(req.body.value==='1')
+    if(req.body.value==='1'||req.body.value==='2')
     {
 
         req.body['userId']=req.user.dataValues.id

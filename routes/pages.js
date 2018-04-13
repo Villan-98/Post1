@@ -40,7 +40,12 @@ route.get('/home',(req,res)=>{                             //active post button 
     if(!req.user)
     {
         res.redirect('/login/signin')
-    }
+    }/*
+    if(req.user.college===''||(!req.user.username))
+    {
+        res.redirect('/user/profile')
+    }*/
+    console.log("username is"+req.user.username)
     ctrl_post.getallpost(req.user)
         .then((posts)=>{
             ctrl_post.HVPost()

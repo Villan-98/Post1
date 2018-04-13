@@ -5,9 +5,6 @@
                     <div clss="col-2">
                         <p>Hi,{{posts.UserName}}</p>
                     </div>
-                    <div class="col float-right">
-                        <a  class="primary float-right" href="http://localhost:2400/user/Mypost"style="font-size:15px;background-color:whitesmoke" >Profile</a>
-                    </div>
                 </div>
                 <form action="/post" method="post">
                     <div class="form-group">
@@ -70,22 +67,30 @@
                             </div>
                         {{/if}}
                         <div class="row mt-3">
-                            <div class="col-lg-1 col-sm-2" id="L{{post.id}}">
-                                {{#if post.likes.0.value}}
 
-                                     <i class="fa fa-thumbs-up" onclick="like_post({{post.id}},-1,{{post.vote}},0),abv()" style="font-size: 36px" aria-hidden="true">{{post.likes.value}}</i>
+                            {{#if post.likes.0.value}}
+                                    <div class="col-lg-2 col-sm-3" id="N{{post.id}}">
+                                    <i class="fa fa-thumbs-up" onclick="like_post({{post.id}},-1,{{post.vote}},0),abv()" style="font-size: 36px" aria-hidden="true">{{post.likes.value}}</i>
+                                    <i class="fa fa-thumbs-o-down"onclick="like_post({{post.id}},-2,{{post.vote}},1),abv()" style="font-size:36px"aria-hidden="true"></i>
 
+                                </div>
+
+                                {{else }}
+                                    {{#if post.dislikes.0.value}}
+                                    <div class="col-lg-2 col-sm-3" id="N{{post.id}}">
+                                        <i class="fa fa-thumbs-o-up" onclick="like_post({{post.id}},2,{{post.vote}},1),abv()" style="font-size: 36px" aria-hidden="true"></i>
+                                        <i class="fa fa-thumbs-down"onclick="like_post({{post.id}},1,{{post.vote}},0),abv()" style="font-size:36px"aria-hidden="true"></i>
+
+                                    </div>
                                 {{else}}
-                                    <i class="fa fa-thumbs-o-up" onclick="like_post({{post.id}},1,{{post.vote}},1),abv()" style="font-size: 36px" aria-hidden="true"></i>
-                                {{/if}}
-                            </div>
-                            <div class="col-lg-1 col-sm-2" id="D{{post.id}}">
-                                {{#if post.dislikes.0.value}}
-                                    <i class="fa fa-thumbs-down"onclick="like_post({{post.id}},1,{{post.vote}},0),abv()" style="font-size:36px"aria-hidden="true"></i>
-                                {{else}}
-                                    <i class="fa fa-thumbs-o-down"onclick="like_post({{post.id}},-1,{{post.vote}},1),abv()" style="font-size:36px"aria-hidden="true"></i>
-                                {{/if}}
-                            </div>
+                                    <div class="col-lg-2 col-sm-3" id="N{{post.id}}">
+                                        <i class="fa fa-thumbs-o-up" onclick="like_post({{post.id}},1,{{post.vote}},1),abv()" style="font-size: 36px" aria-hidden="true"></i>
+                                        <i class="fa fa-thumbs-o-down"onclick="like_post({{post.id}},-1,{{post.vote}},1),abv()" style="font-size:36px"aria-hidden="true"></i>
+
+                                    </div>
+                                    {{/if}}
+                            {{/if}}
+
 
                             <div id="V{{post.id}}" class="col-1">
                                 <div>

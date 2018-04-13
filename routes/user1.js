@@ -23,7 +23,6 @@ route.get('/signup',(req,res)=>{
     res.render('signup',{layout:false})
     })
 route.post('/signup',(req,res)=>{
-
     console.log(req.body.email)
     if(req.body.email==="")
     {
