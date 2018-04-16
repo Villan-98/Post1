@@ -6,9 +6,13 @@ exports=module.exports={
     getHVPost:async(reqQuery)=>{
        return Posts.findOne({
             where:{
-                userId:reqQuery.id
+                userId:reqQuery.id              //this HV post is to get the highest voted post in my achievement
             },
-           order:[['vote','DESC']]
+           order:[['vote','DESC']],
+           /*include:[{
+                model:User,
+               attribute:['name']
+           }]*/
 
         })
     },

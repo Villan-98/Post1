@@ -51,8 +51,6 @@ route.get('/home',(req,res)=>{                             //active post button 
             ctrl_post.HVPost()
                 .then((data)=>{
 
-                    console.log(req.user.name)
-                    console.log(req.user.id)
                     posts['UserId']=req.user.id
                     posts["UserName"]=req.user.name
                     posts['active']=req.active

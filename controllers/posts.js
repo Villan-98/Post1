@@ -159,6 +159,10 @@ exports=module.exports={
     HVPost:()=>{
         return Post.max('vote',{
 
+            include:[{
+                model:User,
+                attributes:['name']
+            }]
 
         })
 

@@ -145,10 +145,10 @@ route.patch('/',(req,res)=>{
 })
 route.post('/comment',(req,res)=>{
     console.log("reaching in the comment ")
-    console.log("userid"+req.body.userId)
-    console.log("userid"+req.body.postId)
+    console.log("userid"+req.user.id)
+    console.log("userid"+req.body.Ctext)
     //req.body['userId']=req.user.dataValues.id
-    console.log("userid"+req.body)
+    req.body['userId']=req.user.id
 
     ctrlComment.addComment(req.body)
         .then(()=>{
@@ -160,7 +160,7 @@ route.post('/comment',(req,res)=>{
             }
             ctrlComment.getComment(req.query)
                 .then((data)=>{
-                   // res.send(data)
+                   res.send(data)
                 }).catch((err)=>{
                 console.log(err)
             })

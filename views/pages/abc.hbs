@@ -107,11 +107,11 @@
                                 <div class="card card-body">
                                     <div class="row">
                                         <div class="col">
-                                            <form action="/post/comment" method="post">
+                                            <!--<form action="/post/comment" method="post">-->
                                                 <div class="form-group">
                                                     <div class="row">
                                                         <div class="col-8">
-                                                            <textarea class="form-control" name="text" placeholder="Write Your comment here" rows="1"></textarea>
+                                                            <textarea class="form-control" name="text" id="Cb" placeholder="Write Your comment here" rows="1"></textarea>
                                                         </div>
                                                         <div class="col-1">
                                                             <input type="hidden" name="postId" value="{{post.id}}">
@@ -120,11 +120,11 @@
                                                             <input type="hidden" name="userId" value="{{../posts.UserId}}">
                                                         </div>
                                                         <div class="col-2">
-                                                            <button type="submit" class="btn btn-primary px-4 ">Send</button>
+                                                            <button type="submit" class="btn btn-primary px-4 " onclick="send_comment({{post.id}})">Send</button>
                                                         </div>
                                                     </div>
                                                 </div>
-                                            </form>
+
                                             <div class="row">
                                                 <div id="C{{post.id}}" class="col testing">
                                             </div >
