@@ -3,7 +3,7 @@ const user=require('../controllers/user')
 route.get('/',(req,res)=>{
     if(!req.user)
     {
-        res.redirect('./login/signin')
+        res.redirect('/auth/signin')
     }
     else{
         user.getallUser_clg(req)

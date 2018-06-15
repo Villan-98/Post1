@@ -1,116 +1,20 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+<div class="container">
 
-    <title>Title</title>
-</head>
-<body>
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-2 bg-light ">
-                <div class="row">
-
-                    <div class="col" >
-                        <i class="fas fa-user-circle " style="font-size:200px"></i>
-
-                        <div  class="text-center nav flex-column nav-pills">
-                            <div>
-                                <a class="nav-link " href="http://localhost:2400/user/home" style="font-size:15px">Home</a>
-
-                            </div>
-
-                            <div>
-
-                                <a class="nav-link "href="http://localhost:2400/user/Mypost"style="font-size:15px">Profile</a>
-                            </div>
-                            <div>
-
-                                <a class="nav-link "href="http://localhost:2400/user/achievement" style="font-size:15px">Achievement</a>
-                            </div>
-                            <div>
-
-                                <a class="nav-link" href="http://localhost:2400/user/Mypost" style="font-size:15px">Notifications</a>
-                            </div>
-                            <div>
-
-                                <a class="nav-link active"href="http://localhost:2400/user/profile"style="font-size:15px">Edit Profile</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+</div><div class="row">
+    <div class="col-md-5 offset-3">
+        <div class="card text-center mt-md-5">
+            <div class="card-header">
+                <h3>Profile detail</h3>
             </div>
-            <div class="col-8 text-center">
-                <div>
+            <div class="card-body">
+                <h5 class="card-text mt-1"><span><strong> Username : </strong> {{r.user.name}}</span></h5>
+                <h5 class="card-text"><span><strong> College : </strong>{{ r.user.college}}</span></h5>
+                <h5 class="card-text"><span><strong> Email : </strong>{{ r.user.email}}</span></h5>
+                <h5 class="card-text"><span><strong> Total Posts : </strong>{{ r.user.state}}</span></h5>
+                <h5 class="card-text"><span><strong> Badges : </strong>{{ r.user.phn}}</span></h5>
 
-                    <h2 class="bg-light py-3">Edit Profile</h2>
-                </div>
-                <div class="jumbotron pt-4">
-
-                    <form action="/user/profile" method="post" >
-
-
-                        <div class="row">
-
-                            <div class="form-group col-md-6">
-                                <label for="exampleFormControlFile1" >name</label>
-                                <input type="text" name="name" class="form-control" id="name" value="{{user.name}}">
-                            </div>
-                            <div class="form-group col-md-6">
-                                <label for="username" >Username</label>
-                                <input type="text" name="username" class="form-control" id="username" value="{{user.username}}">
-                            </div>
-
-                        </div>
-                        <div class="form-group col-md-12">
-                            <label for="college" >College Name</label>
-                            <input type="text" name="college" class="form-control" id="college" value="{{user.college}}">
-                        </div>
-                        {{#if user.success}}
-                        {{else}}
-                            {{#if user.status}}
-
-                            <div class="alert alert-danger" role="alert">
-                                {{user.status}}
-                            </div>
-                            {{/if}}
-                        {{/if}}
-                        <div class="row">
-
-                            <div class="form-group col-md-4">
-                                <label for="oldP" >Old Password</label>
-                                <input type="password" name="old_pass" class="form-control" id="oldP" >
-                            </div>
-                            <div class="form-group col-md-4">
-                                <label for="newP" >New Password</label>
-                                <input type="password" name="new_pass" class="form-control" id="newP" >
-                            </div>
-                            <div class="form-group col-md-4">
-                                <label for="confP" >Confirm Password</label>
-                                <input type="password" name="conf_pass" class="form-control" id="confP">
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" name="changeP"id="checkchange">
-                                <label class="form-check-label" for="checkchange">
-                                    Check it if you want to change password
-                                </label>
-                            </div>
-                        </div>
-
-                            <button type="submit" class="btn btn-primary px-4 ">Pos Pict</button>
-                    </form>
-                </div>
+                <a href="/user/editProfile" class="btn btn-danger">Edit Profile</a>
             </div>
         </div>
-
     </div>
-
-</body>
-</html>
+</div>

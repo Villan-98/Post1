@@ -38,18 +38,17 @@ app.get('/logout',(req,res)=>{
     req.user=null
     req.logout()
     req.session.destroy((err)=>{
-        res.redirect('/login/signin')
+        res.redirect('/auth/signin')
     })
 })
 app.get('/',(req,res)=>{
 
-  res.render('home',{})
+  res.render('test')
 
 })
 app.use('/',express.static(path.join(__dirname,'public')))
 app.use('/auth',require('./routes/Rauth'))
-app.use('/login1',require('./routes/user1'))
-app.use('/user', require('./routes/pages'))
+app.use('/:name', require('./routes/Ruser'))
 app.use('/leader',require('./routes/achievement'))
 app.use('/post',require('./routes/posts'))
 app.use('/like',require('./routes/like'))

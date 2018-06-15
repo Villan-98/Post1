@@ -1,75 +1,81 @@
-{{#each posts as |post|}}
-    <div class="bg-light py-2 px-2 my-2" style="">
-        <div class="bg-white">
-            {{post.user.name}}
-        </div>
-        {{#if post.pic}}
-            <div>
-                <img src='/upload/{{post.address}}' >
-            </div>
-        {{else}}
-            <div >
-                {{post.text}}
-            </div>
-        {{/if}}
-        <div class="row mt-3">
-            {{#if post.likes.0.value}}
-                <div class="col-lg-2 col-sm-3" id="N{{post.id}}">
-                    <i class="fa fa-thumbs-up" onclick="like_post({{post.id}},-1,{{post.vote}},0),abv()" style="font-size: 36px" aria-hidden="true">{{post.likes.value}}</i>
-                    <i class="fa fa-thumbs-o-down"onclick="like_post({{post.id}},-2,{{post.vote}},1),abv()" style="font-size:36px"aria-hidden="true"></i>
+<div class="row">
+    <div class="col">
+        {{#each posts as |post|}}
+            <div class="bg-light py-2 px-2 my-2">
+                <div class="bg-white">
+                    {{post.user.name}}
                 </div>
-            {{else }}
-                {{#if post.dislikes.0.value}}
-                    <div class="col-lg-2 col-sm-3" id="N{{post.id}}">
-                        <i class="fa fa-thumbs-o-up" onclick="like_post({{post.id}},2,{{post.vote}},1),abv()" style="font-size: 36px" aria-hidden="true"></i>
-                        <i class="fa fa-thumbs-down"onclick="like_post({{post.id}},1,{{post.vote}},0),abv()" style="font-size:36px"aria-hidden="true"></i>
+                {{#if post.pic}}
+                    <div>
+                        <img src='/upload/{{post.address}}' >
                     </div>
                 {{else}}
-                    <div class="col-lg-2 col-sm-3" id="N{{post.id}}">
-                        <i class="fa fa-thumbs-o-up" onclick="like_post({{post.id}},1,{{post.vote}},1),abv()" style="font-size: 36px" aria-hidden="true"></i>
-                        <i class="fa fa-thumbs-o-down"onclick="like_post({{post.id}},-1,{{post.vote}},1),abv()" style="font-size:36px"aria-hidden="true"></i>
+                    <div >
+                        {{post.text}}
                     </div>
                 {{/if}}
-            {{/if}}
-            <div id="V{{post.id}}" class="col-1">
-                <div>
-                    {{post.vote}}
-                </div>
-            </div>
-            <div class="col">
-                <button class="btn btn-light" type="button" id="b{{post.id}}" onclick="fetch_comment({{post.id}})"  data-toggle="collapse" data-target="#{{post.id}}" aria-expanded="false" aria-controls="collapseExample">
-                    Comment
-                </button>
-            </div>
-        </div>
-        <div class="collapse" id="{{post.id}}">
-            <div class="card card-body">
-                <div class="row">
+                <div class="row mt-3">
+                    {{#if post.likes.0.value}}
+                        <div class="col-lg-2 col-sm-3" id="N{{post.id}}">
+                            <i class="fa fa-thumbs-up" onclick="like_post({{post.id}},-1,{{post.vote}},0),abv()" style="font-size: 36px" aria-hidden="true">{{post.likes.value}}</i>
+                            <i class="fa fa-thumbs-o-down"onclick="like_post({{post.id}},-2,{{post.vote}},1),abv()" style="font-size:36px"aria-hidden="true"></i>
+                        </div>
+                    {{else }}
+                        {{#if post.dislikes.0.value}}
+                            <div class="col-lg-2 col-sm-3" id="N{{post.id}}">
+                                <i class="fa fa-thumbs-o-up" onclick="like_post({{post.id}},2,{{post.vote}},1),abv()" style="font-size: 36px" aria-hidden="true"></i>
+                                <i class="fa fa-thumbs-down"onclick="like_post({{post.id}},1,{{post.vote}},0),abv()" style="font-size:36px"aria-hidden="true"></i>
+                            </div>
+                        {{else}}
+                            <div class="col-lg-2 col-sm-3" id="N{{post.id}}">
+                                <i class="fa fa-thumbs-o-up" onclick="like_post({{post.id}},1,{{post.vote}},1),abv()" style="font-size: 36px" aria-hidden="true"></i>
+                                <i class="fa fa-thumbs-o-down"onclick="like_post({{post.id}},-1,{{post.vote}},1),abv()" style="font-size:36px"aria-hidden="true"></i>
+                            </div>
+                        {{/if}}
+                    {{/if}}
+                    <div id="V{{post.id}}" class="col-1">
+                        <div>
+                            {{post.vote}}
+                        </div>
+                    </div>
                     <div class="col">
-                        <!--<form action="/post/comment" method="post">-->
-                        <div class="form-group">
-                            <div class="row">
-                                <div class="col-8">
-                                    <textarea class="form-control" name="text" id="Cb" placeholder="Write Your comment here" rows="1"></textarea>
+                        <button class="btn btn-light" type="button" id="b{{post.id}}" onclick="fetch_comment({{post.id}})"  data-toggle="collapse" data-target="#{{post.id}}" aria-expanded="false" aria-controls="collapseExample">
+                            Comment
+                        </button>
+                    </div>
+                </div>
+                <div class="collapse" id="{{post.id}}">
+                    <div class="card card-body">
+                        <div class="row">
+                            <div class="col">
+                                <!--<form action="/post/comment" method="post">-->
+                                <div class="form-group">
+                                    <div class="row">
+                                        <div class="col-8">
+                                            <textarea class="form-control" name="text" id="Cb" placeholder="Write Your comment here" rows="1"></textarea>
+                                        </div>
+                                        <div class="col-1">
+                                            <input type="hidden" name="postId" value="{{post.id}}">
+                                        </div>
+                                        <div class="col-1">
+                                            <input type="hidden" name="userId" value="{{../posts.UserId}}">
+                                        </div>
+                                        <div class="col-2">
+                                            <button type="submit" class="btn btn-primary px-4 " onclick="send_comment({{post.id}})">Send</button>
+                                        </div>
+                                    </div>
                                 </div>
-                                <div class="col-1">
-                                    <input type="hidden" name="postId" value="{{post.id}}">
-                                </div>
-                                <div class="col-1">
-                                    <input type="hidden" name="userId" value="{{../posts.UserId}}">
-                                </div>
-                                <div class="col-2">
-                                    <button type="submit" class="btn btn-primary px-4 " onclick="send_comment({{post.id}})">Send</button>
+                                <div class="row">
+                                    <div id="C{{post.id}}" class="col testing">
+                                    </div >
                                 </div>
                             </div>
                         </div>
-                        <div class="row">
-                            <div id="C{{post.id}}" class="col testing">
-                            </div >
-                        </div>
                     </div>
                 </div>
             </div>
-        </div>
+        {{/each}}
     </div>
-{{/each}}
+</div>
+
+

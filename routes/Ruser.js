@@ -36,26 +36,16 @@ route.get('/profile',(req,res)=>{
 
     res.render('profile')
 })*/
-route.get('/home',(req,res)=>{                             //active post button is removed
+route.get('/',(req,res)=>{                             //active post button is removed
     if(!req.user)
     {
-        res.redirect('/login/signin')
+        res.redirect('/auth/signin')
     }/*
     if(req.user.college===''||(!req.user.username))
     {
         res.redirect('/user/profile')
     }*/
     console.log("username is"+req.user.username)
-    /*socket.emit('login',{
-        username:req.user.username
-    })
-    socket.on('logged_in',(data)=>{
-        if (data.success)
-        {
-            console.log("socket data entered")
-        }
-    {}
-    })*/
     ctrl_post.getallpost(req.user)
         .then((posts)=>{
             ctrl_post.HVPost()
@@ -66,7 +56,6 @@ route.get('/home',(req,res)=>{                             //active post button 
                     posts['clg']=req.user.college
                     posts['active']=req.active
                     console.log("active is "+req.active)
-
 
                        console.log(data[0].dataValues['user'].dataValues['name'])
                        posts['hv_post']=data[0].dataValues['user'].dataValues['name']
@@ -84,7 +73,7 @@ route.get('/home',(req,res)=>{                             //active post button 
 })
 route.get('/MyPost',ActivePostButton,(req,res)=>{
     if(!req.user){
-        res.redirect('/login/signin')
+        res.redirect('/auth/signin')
     }
     console.log("req user is "+req.user.name)
     ctrl_post.getpost(req.user)
@@ -110,19 +99,17 @@ route.get('/MyPost',ActivePostButton,(req,res)=>{
 route.get('/profile',(req,res)=>{
     if(!req.user)
     {
-        res.redirect('/login/signin')
+        res.redirect('/auth/signin')
     }
     else{
         console.log("in the user")
                 let user=req.user
-                //console.log("sjdfklsjfksljfl"+req.user.name)
-                //console.log("sdkjfklsdjfskljflsakfjdsal"+user)
-                res.render('profile',{user,layout:false})
+                res.render('profile',{r:req})
     }
 })
 route.get('/achievement',(req,res)=>{
     if(!req.user){
-        res.redirect('/login/signin')
+        res.redirect('/auth/signin')
     }
     else{
         ctrl_achieve.getHVPost(req.user)
@@ -133,10 +120,20 @@ route.get('/achievement',(req,res)=>{
         )
     }
 })
-route.post('/profile',(req,res)=>{
+route.get('/editProfile',(req,res)=>{
+    if(req.isAuthenticated())
+    {
+
+        res.render('editProfile',{user:req.user})
+    }
+    else{
+        res.redirect('/auth/signin')
+    }
+})
+route.post('/editProfile',(req,res)=>{
     if(!req.user)
     {
-        res.redirect('/login/signin')
+        res.redirect('/auth/signin')
     }
     else{
         console.log(req.body)

@@ -1,69 +1,23 @@
-
+<div class="row">
+    {{>collegues}}
+{{#if posts.clg}}
+    <div class="col">
+    {{>send_post}}
+    {{>searched_post}}
+    </div>
+{{else}}
+    <div class="col" >
+        <div class="row">
             <div class="col" style="float:left;width:1000px;overflow-y: auto;height: 800px;-ms-scrollbar-track-color: transparent;">
-
-                <div class="row" >
-                    <div class="col-2">
-                        <p>Hi,{{posts.UserName}}</p>
-                    </div>
-
+                <div class="col alert-danger">
+                    Update your profile that is college name,username
                 </div>
-                <div class="row" style="overflow-y: hidden">
-                    <div class="col" style="float:left;width:1000px;overflow-y: auto;height: 800px;-ms-scrollbar-track-color: transparent;">
-                    {{#if posts.clg}}
-                        <form action="/post" method="post">
-                            <div class="form-group">
-                                <div class="my-2">
-
-                                    <textarea class="form-control" name="text" placeholder="What's on your Mind" rows="3"></textarea>
-
-                                </div>
-                                <div>
-                                    <!--  <input type="hidden" name="userId" value="{{posts.UserId}}">-->
-                                </div>
-                                <div>
-                                    <button type="submit" class="btn btn-primary px-4 ">Post</button>
-
-                                </div>
-                            </div>
-                        </form>
-                        <form action="/post" method="post" enctype="multipart/form-data">
-
-                            <div class="form-group">
-                                <div class="row" style="border: solid #c8cbcf;border-width: thin;border-radius: 5px">
-
-                                    <div class="col-3 py-2 ">
-                                        <label for="file" class="btn btn-light px-4 py-4git status">Choose Images</label>
-                                        <input type="file" id="file" name="Mypost" class="form-control-file py-4 bg-light"style=" display: none;border: solid #c8cbcf;border-width: thin;border-radius: 5px">
-                                    </div>
-                                    <div class="col-3 my-4">
-                                        <button type="submit" class="btn btn-primary px-4 py-2">Upload</button>
-                                    </div>
-                                </div>
-                            </div>
-
-
-                            <!--
-                    {{#if posts.active}}
-                        <button type="submit" class="btn btn-primary px-4 ">Post</button>
-                    {{else}}
-                        <button type="submit" class="btn btn-primary px-4 disabled" disabled>Post</button>
-                    {{/if}}
--->
-                        </form>
-                                {{>searched_post}}
-                    </div>
-                    {{else}}
-
-                    <div class="row" >
-                    <div class="col" style="float:left;width:1000px;overflow-y: auto;height: 800px;-ms-scrollbar-track-color: transparent;">
-                        <div class="col alert-danger">
-                            UPdate your profile that is college name,username
-                        </div>
-                    </div>
-                    </div>
-                    {{/if}}
-                </div>
-
-
             </div>
+        </div>
 
+    </div>
+
+{{/if}}
+    {{>ranker}}
+
+</div>
