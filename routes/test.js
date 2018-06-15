@@ -4,6 +4,13 @@ const user=require('../controllers/user')
 
 const Post=require('../controllers/posts')
 route.get('/abc',(req,res)=>{
+    user.getallUser_clg(req)
+        .then((data)=>{
+        res.send(201).json(data)
+    })
+        .catch((err)=>{
+            res.status(404).json(err)
+        })
     /*ctrl.get_tot_post(req.user)
         .then((data)=>{
         console.log(data)

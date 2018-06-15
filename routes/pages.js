@@ -4,6 +4,7 @@ const ctrl_post=require('../controllers/posts')
 const ctrl_achieve=require('../controllers/achievements')
 const liked_post=require('../controllers/like')
 const chk=require('../controllers/achievements')
+
 function ActivePostButton(req,res,next){
         ctrl_post.getpost(req.user)
         .then((post)=>{
@@ -35,7 +36,6 @@ route.get('/profile',(req,res)=>{
 
     res.render('profile')
 })*/
-
 route.get('/home',(req,res)=>{                             //active post button is removed
     if(!req.user)
     {
@@ -46,17 +46,32 @@ route.get('/home',(req,res)=>{                             //active post button 
         res.redirect('/user/profile')
     }*/
     console.log("username is"+req.user.username)
+    /*socket.emit('login',{
+        username:req.user.username
+    })
+    socket.on('logged_in',(data)=>{
+        if (data.success)
+        {
+            console.log("socket data entered")
+        }
+    {}
+    })*/
     ctrl_post.getallpost(req.user)
         .then((posts)=>{
             ctrl_post.HVPost()
                 .then((data)=>{
-
+                    console.log("data zero is"+data)        //why is printing object object in console
                     posts['UserId']=req.user.id
                     posts["UserName"]=req.user.name
+                    posts['clg']=req.user.college
                     posts['active']=req.active
-                    posts['hv_post']=data
                     console.log("active is "+req.active)
-                    //res.status(201).json({posts})
+
+
+                       console.log(data[0].dataValues['user'].dataValues['name'])
+                       posts['hv_post']=data[0].dataValues['user'].dataValues['name']
+                   console.log(posts.hv_post)
+                    //res.status(201).json(data)
                     res.render('abc',{posts})
                 })
         })
@@ -103,9 +118,6 @@ route.get('/profile',(req,res)=>{
                 //console.log("sjdfklsjfksljfl"+req.user.name)
                 //console.log("sdkjfklsdjfskljflsakfjdsal"+user)
                 res.render('profile',{user,layout:false})
-
-
-
     }
 })
 route.get('/achievement',(req,res)=>{
@@ -144,6 +156,7 @@ route.post('/profile',(req,res)=>{
                     ctrl_user.updateUser(req.body)
                         .then((data)=>{
                                 console.log(data)
+                                console.log(req.user.password)
                                 if(data[0]===1)
                                 {
                                     let user=req.user
@@ -197,5 +210,4 @@ route.post('/profile',(req,res)=>{
         }
     }
 })
-
 exports=module.exports=route

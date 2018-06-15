@@ -157,12 +157,14 @@ exports=module.exports={
         })
     },
     HVPost:()=>{
-        return Post.max('vote',{
+        return Post.findAll({
 
             include:[{
                 model:User,
                 attributes:['name']
-            }]
+            }],
+
+            order:[['vote','DESC']]
 
         })
 

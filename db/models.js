@@ -25,7 +25,6 @@ const User=db.define('user',{
     },
     college:{
         type:DataTypes.STRING,
-        defaultValue:"DTU"
     },
     rights:{
         type:DataTypes.STRING,
@@ -134,6 +133,7 @@ Comment.belongsTo(User,{foreignKey:{
     }})
 db.sync({
   //force:true
+   // alter:true
 })
     .then(()=>{console.log("database syncronised")})
 exports=module.exports={

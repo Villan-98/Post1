@@ -1,5 +1,5 @@
 const route=require('express').Router()
-const User=require('../db/models').User
+const Rauth=require('../db/models').User
 const passport=require('../passport')
 route.get('/signin',(r,s)=>{
     s.render('signin',{layout:false})

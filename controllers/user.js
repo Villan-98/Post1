@@ -14,8 +14,14 @@ exports=module.exports= {
             where:id=parseInt(reqQuery.id)
         })
     },
-    getallUser:async(reqQuery)=>{
-       return User.findAll()
+    getallUser_clg:async(reqQuery)=>{
+       return User.findAll(
+           {
+               where:{
+                   college:'DTU'
+               }
+           }
+       )
 
     },
     getUser:async(reqQuery)=>{

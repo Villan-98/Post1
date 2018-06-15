@@ -1,23 +1,47 @@
 
-            <div class="col" style="float:left;width:1000px;overflow-y: auto;height: 800px;">
+            <div class="col" style="float:left;width:1000px;overflow-y: auto;height: 800px;-ms-scrollbar-track-color: transparent;">
 
-                <div class="row">
-                    <div clss="col-2">
+                <div class="row" >
+                    <div class="col-2">
                         <p>Hi,{{posts.UserName}}</p>
                     </div>
+
                 </div>
-                <form action="/post" method="post">
-                    <div class="form-group">
-                        <div class="my-2">
+                <div class="row" style="overflow-y: hidden">
+                    <div class="col" style="float:left;width:1000px;overflow-y: auto;height: 800px;-ms-scrollbar-track-color: transparent;">
+                    {{#if posts.clg}}
+                        <form action="/post" method="post">
+                            <div class="form-group">
+                                <div class="my-2">
 
-                            <textarea class="form-control" name="text" placeholder="What's on your Mind" rows="3"></textarea>
+                                    <textarea class="form-control" name="text" placeholder="What's on your Mind" rows="3"></textarea>
 
-                        </div>
-                        <div>
-                          <!--  <input type="hidden" name="userId" value="{{posts.UserId}}">-->
-                        </div>
-                        <div>
-                            <button type="submit" class="btn btn-primary px-4 ">Post</button>
+                                </div>
+                                <div>
+                                    <!--  <input type="hidden" name="userId" value="{{posts.UserId}}">-->
+                                </div>
+                                <div>
+                                    <button type="submit" class="btn btn-primary px-4 ">Post</button>
+
+                                </div>
+                            </div>
+                        </form>
+                        <form action="/post" method="post" enctype="multipart/form-data">
+
+                            <div class="form-group">
+                                <div class="row" style="border: solid #c8cbcf;border-width: thin;border-radius: 5px">
+
+                                    <div class="col-3 py-2 ">
+                                        <label for="file" class="btn btn-light px-4 py-4git status">Choose Images</label>
+                                        <input type="file" id="file" name="Mypost" class="form-control-file py-4 bg-light"style=" display: none;border: solid #c8cbcf;border-width: thin;border-radius: 5px">
+                                    </div>
+                                    <div class="col-3 my-4">
+                                        <button type="submit" class="btn btn-primary px-4 py-2">Upload</button>
+                                    </div>
+                                </div>
+                            </div>
+
+
                             <!--
                     {{#if posts.active}}
                         <button type="submit" class="btn btn-primary px-4 ">Post</button>
@@ -25,114 +49,21 @@
                         <button type="submit" class="btn btn-primary px-4 disabled" disabled>Post</button>
                     {{/if}}
 -->
-                        </div>
+                        </form>
+                                {{>searched_post}}
                     </div>
-                </form>
-                <form action="/post" method="post" enctype="multipart/form-data">
-
-                    <div class="form-group">
-                        <div class="row" style="border: solid #c8cbcf;border-width: thin;border-radius: 5px">
-
-                            <div class="col-3 py-2 ">
-                                <label for="file" class="btn btn-light px-4 py-4git status">Choose Images</label>
-                                <input type="file" id="file" name="Mypost" class="form-control-file py-4 bg-light"style=" display: none;border: solid #c8cbcf;border-width: thin;border-radius: 5px">
-                            </div>
-                            <div class="col-3 my-4">
-                                <button type="submit" class="btn btn-primary px-4 py-2">Upload</button>
-                            </div>
-                        </div>
-                    </div>
-
-
-                    <!--
-                    {{#if posts.active}}
-                        <button type="submit" class="btn btn-primary px-4 ">Post</button>
                     {{else}}
-                        <button type="submit" class="btn btn-primary px-4 disabled" disabled>Post</button>
+
+                    <div class="row" >
+                    <div class="col" style="float:left;width:1000px;overflow-y: auto;height: 800px;-ms-scrollbar-track-color: transparent;">
+                        <div class="col alert-danger">
+                            UPdate your profile that is college name,username
+                        </div>
+                    </div>
+                    </div>
                     {{/if}}
--->
-                </form>
-                {{#each posts as |post|}}
-                     <div class="bg-light py-2 px-2 my-2" style="">
-                        <div class="bg-white">
-                            {{post.user.name}}
-                        </div>
-                         {{#if post.pic}}
-                             <div>
-                                 <img src='/upload/{{post.address}}' >
-                             </div>
-                        {{else}}
-                            <div >
-                                {{post.text}}
-                            </div>
-                        {{/if}}
-                        <div class="row mt-3">
-
-                            {{#if post.likes.0.value}}
-                                    <div class="col-lg-2 col-sm-3" id="N{{post.id}}">
-                                    <i class="fa fa-thumbs-up" onclick="like_post({{post.id}},-1,{{post.vote}},0),abv()" style="font-size: 36px" aria-hidden="true">{{post.likes.value}}</i>
-                                    <i class="fa fa-thumbs-o-down"onclick="like_post({{post.id}},-2,{{post.vote}},1),abv()" style="font-size:36px"aria-hidden="true"></i>
-
-                                </div>
-
-                                {{else }}
-                                    {{#if post.dislikes.0.value}}
-                                    <div class="col-lg-2 col-sm-3" id="N{{post.id}}">
-                                        <i class="fa fa-thumbs-o-up" onclick="like_post({{post.id}},2,{{post.vote}},1),abv()" style="font-size: 36px" aria-hidden="true"></i>
-                                        <i class="fa fa-thumbs-down"onclick="like_post({{post.id}},1,{{post.vote}},0),abv()" style="font-size:36px"aria-hidden="true"></i>
-
-                                    </div>
-                                {{else}}
-                                    <div class="col-lg-2 col-sm-3" id="N{{post.id}}">
-                                        <i class="fa fa-thumbs-o-up" onclick="like_post({{post.id}},1,{{post.vote}},1),abv()" style="font-size: 36px" aria-hidden="true"></i>
-                                        <i class="fa fa-thumbs-o-down"onclick="like_post({{post.id}},-1,{{post.vote}},1),abv()" style="font-size:36px"aria-hidden="true"></i>
-
-                                    </div>
-                                    {{/if}}
-                            {{/if}}
+                </div>
 
 
-                            <div id="V{{post.id}}" class="col-1">
-                                <div>
-                                    {{post.vote}}
-                                </div>
-                            </div>
-                            <div class="col">
-                                <button class="btn btn-light" type="button" id="b{{post.id}}" onclick="fetch_comment({{post.id}})"  data-toggle="collapse" data-target="#{{post.id}}" aria-expanded="false" aria-controls="collapseExample">
-                                    Comment
-                                </button>
-                            </div>
-                        </div>
-                            <div class="collapse" id="{{post.id}}">
-                                <div class="card card-body">
-                                    <div class="row">
-                                        <div class="col">
-                                            <!--<form action="/post/comment" method="post">-->
-                                                <div class="form-group">
-                                                    <div class="row">
-                                                        <div class="col-8">
-                                                            <textarea class="form-control" name="text" id="Cb" placeholder="Write Your comment here" rows="1"></textarea>
-                                                        </div>
-                                                        <div class="col-1">
-                                                            <input type="hidden" name="postId" value="{{post.id}}">
-                                                        </div>
-                                                        <div class="col-1">
-                                                            <input type="hidden" name="userId" value="{{../posts.UserId}}">
-                                                        </div>
-                                                        <div class="col-2">
-                                                            <button type="submit" class="btn btn-primary px-4 " onclick="send_comment({{post.id}})">Send</button>
-                                                        </div>
-                                                    </div>
-                                                </div>
-
-                                            <div class="row">
-                                                <div id="C{{post.id}}" class="col testing">
-                                            </div >
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                     </div>
-                {{/each}}
             </div>
+

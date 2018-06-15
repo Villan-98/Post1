@@ -1,26 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-
     <meta charset="UTF-8">
+
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <script src="/js/jquery-3.2.1.js"></script>
-    <script src="/js/post.js"></script>
-    <script src="/js/achievement.js"></script>
-    <script src="/js/comment.js"></script>
+
     <script src="/socket.io/socket.io.js"></script>
     <script src="../js/chat.js"></script>
-    <title>home</title>
+    <title>Title</title>
 </head>
 <body>
     <div class="container-fluid">
-        <div class="row bg-dark">
-            <div class="col" style='font-family: "Apple Color Emoji";color: white;font-size: large'>
-
-                <i class="far fa-smile" style="font-size: 36px"></i> <p>Irony</p>
-            </div>
-        </div>
         <div class="row">
             <div class="col-2 bg-light ">
                 <div class="row">
@@ -55,26 +47,52 @@
                             </div>
                             <div class="nav-item">
 
-                                <a  id="start_chat" class="nav-link"href="http://localhost:2400/chat"style="font-size:15px">Chat Room</a>
+                                <a  class="nav-link"href="http://localhost:2400/chat"style="font-size:15px">Chat Room</a>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-            {{{body}}}
 
-            <div class="col-3" style="background-color: whitesmoke;font-family: Century">
-                <h3>
-                    Leader Board
-                </h3>
-                <div class="row">
-                    <div class="col" id="HV">
-                        <div  >
-                            Highest Scorer is {{posts.hv_post}}
-                        </div>
-                    </div>
+            <div class="col-8 px-0">
+                <div class="col bg-dark text-center py-1 text-light font-weight-bold ">
+                  <h2>Chat Room</h2>
+                </div>
+                <div>
+                    <button id="start_chat">
+                        start chat
+                    </button>
                 </div>
             </div>
+             <!--<h1 class="text-center">Socket Example</h1>
+                <div class="container" id="login">
+                    <div class="row">
+                        <input class="form-control col m-4" type="text" id="inp-username">
+                        <button class="btn btn-success col m-4" id="btn-login">Login</button>
+                    </div>
+                </div>
+                <div class="container" id="chatbox">
+                    <div class="row">
+                        <input class="form-control col m-4" type="text" id="inp-msg">
+                        <button class="btn btn-info col m-4" id="btn-send">SEND</button>
+                    </div>
+
+                    <div class="row p-4 m-4" id="chatlist">
+
+                    </div>
+                </div>
+            </div>-->
+            <div class="col-2 bg-light px-0">
+                <h3 class="bg-primary text-light text-center px-0  py-2 mx-0">Collegues</h3>
+                    {{#each data as |person|}}
+                        <div class="bg-white py-1 my-1 mx-1">
+                            <a class="px-2" href="#">
+                                {{person.name}}
+                            </a>
+                        </div>
+                        {{/each}}
+            </div>
+
         </div>
     </div>
 </body>

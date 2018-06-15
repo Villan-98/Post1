@@ -1,0 +1,59 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+    <title>Test Page</title>
+
+    <style type='text/css'>
+        body {
+            font-family: sans-serif;
+        }
+    </style>
+    <script src="jquery-1.9.1.js" type='text/javascript'></script>
+    <script type='text/javascript'>
+        var valid=false;
+        function wireUpEvents() {
+
+            if(valid){
+                alert("Page Refreshed or Redirected");
+            }else{
+
+                window.onbeforeunload = askWhetherToClose;
+
+            }
+            function askWhetherToClose(event) {
+
+                if(!valid){
+
+                    var msg;
+
+                    msg = "You're leaving the page, do you really want to?";
+                    event = event || window.event;
+                    event.returnValue = msg;
+                    return msg;
+                }}
+            $(document).bind('keypress', function(e) {
+                if (e.keyCode == 116){
+
+                    // or you can insert some code to check page refresh
+                    valid = true;
+
+//wireUpEvents();
+                }
+            });
+            $("a").bind("click", function() {
+//To check redirection using Anchor tags
+                valid = true;
+                //wireUpEvents();
+            });
+        }
+        $(document).ready(function() {
+            wireUpEvents();
+
+        });
+    </script>
+</head>
+<body>
+<p>Close the browser window, or navigate to <a href="http://stackoverflow.com">StackOverflow</a></p>
+</body>
+</html>
