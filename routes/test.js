@@ -1,7 +1,6 @@
 const route=require('express').Router()
 const ctrl=require('../controllers/achievements')
 const user=require('../controllers/user')
-const url=require('../controllers/url')
 const Post=require('../controllers/posts')
 route.get('/abc',(req,res)=>{
     user.getallUser_clg(req)

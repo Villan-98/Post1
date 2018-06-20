@@ -93,15 +93,24 @@ route.get('/MyPost',ActivePostButton,(req,res)=>{
             posts['active']=req.active
             posts['college']=req.user.college
             posts['rights']=req.user.rights
+            let delButton=true
             //res.send(posts)
-             res.render('post',{posts,nav})
+             res.render('post',{posts,nav,delButton})
         })
         .catch((err)=>{
             console.log("error detected")
             console.log(err)
         })
 })
-
+route.delete('/Mypost',(req,res)=>{
+    console.log(req.body)
+    ctrl_post.deletePost(req.body)
+        .then(()=>{
+            res.status(200).json({
+                success:true
+            })
+        })
+})
 route.get('/profile',(req,res)=>{
     if(!req.user)
     {
