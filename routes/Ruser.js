@@ -37,38 +37,44 @@ route.get('/profile',(req,res)=>{
     res.render('profile')
 })*/
 route.get('/',(req,res)=>{                             //active post button is removed
-    if(!req.user)
+    if(!req.isAuthenticated())
     {
         res.redirect('/auth/signin')
+    }
+    else {
+        console.log("username is"+req.user.username)
+        ctrl_post.getallpost(req.user)
+            .then((posts)=>{
+                ctrl_post.HVPost()
+                    .then((data)=>{
+                        console.log("data zero is"+data)        //why is printing object object in console
+                        posts['UserId']=req.user.id
+                        posts["UserName"]=req.user.name
+                        posts['clg']=req.user.college
+                        posts['active']=req.active
+                        console.log("active is "+req.active)
+
+                        console.log(data[0].dataValues['user'].dataValues['name'])
+                        posts['hv_post']=data[0].dataValues['user'].dataValues['name']
+                        console.log(posts.hv_post)
+                        //res.status(201).json(data)
+                        let nav=req.user
+                        console.log("nav is ")
+                        console.log(nav)
+                        res.render('abc',{posts,nav})
+                    })
+            })
+            .catch((err)=>{
+                res.status(200).json({message:"cannot fetch all post"})
+            })
+
+
+
     }/*
     if(req.user.college===''||(!req.user.username))
     {
         res.redirect('/user/profile')
     }*/
-    console.log("username is"+req.user.username)
-    ctrl_post.getallpost(req.user)
-        .then((posts)=>{
-            ctrl_post.HVPost()
-                .then((data)=>{
-                    console.log("data zero is"+data)        //why is printing object object in console
-                    posts['UserId']=req.user.id
-                    posts["UserName"]=req.user.name
-                    posts['clg']=req.user.college
-                    posts['active']=req.active
-                    console.log("active is "+req.active)
-
-                       console.log(data[0].dataValues['user'].dataValues['name'])
-                       posts['hv_post']=data[0].dataValues['user'].dataValues['name']
-                   console.log(posts.hv_post)
-                    //res.status(201).json(data)
-                    res.render('abc',{posts})
-                })
-        })
-        .catch((err)=>{
-            res.status(200).json({message:"cannot fetch all post"})
-        })
-
-
 
 })
 route.get('/MyPost',ActivePostButton,(req,res)=>{
@@ -79,7 +85,7 @@ route.get('/MyPost',ActivePostButton,(req,res)=>{
     ctrl_post.getpost(req.user)
         .then((posts)=>{
            // chk.achieved(posts)
-
+            let nav=req.user
           //  chk.leader()
             console.log("reched in post &")
             posts['UserId']=req.user.id
@@ -88,7 +94,7 @@ route.get('/MyPost',ActivePostButton,(req,res)=>{
             posts['college']=req.user.college
             posts['rights']=req.user.rights
             //res.send(posts)
-             res.render('post',{posts,layout:false})
+             res.render('post',{posts,nav})
         })
         .catch((err)=>{
             console.log("error detected")
@@ -99,12 +105,12 @@ route.get('/MyPost',ActivePostButton,(req,res)=>{
 route.get('/profile',(req,res)=>{
     if(!req.user)
     {
-        res.redirect('/auth/signin')
+        res.redirect('https://wakatime.com/project/health_care?start=2018-06-09&end=2018-06-15')
     }
     else{
         console.log("in the user")
-                let user=req.user
-                res.render('profile',{r:req})
+                let nav=req.user
+                res.render('profile',{r:req,nav})
     }
 })
 route.get('/achievement',(req,res)=>{
@@ -114,7 +120,8 @@ route.get('/achievement',(req,res)=>{
     else{
         ctrl_achieve.getHVPost(req.user)
             .then((data)=>{
-                res.render('achievement',{data})
+                let nav=req.user
+                res.render('achievement',{data,nav})
 
             }
         )
@@ -123,8 +130,8 @@ route.get('/achievement',(req,res)=>{
 route.get('/editProfile',(req,res)=>{
     if(req.isAuthenticated())
     {
-
-        res.render('editProfile',{user:req.user})
+        let nav=req.user
+        res.render('editProfile',{user:req.user,nav})
     }
     else{
         res.redirect('/auth/signin')
@@ -136,6 +143,7 @@ route.post('/editProfile',(req,res)=>{
         res.redirect('/auth/signin')
     }
     else{
+        let nav=req.user
         console.log(req.body)
         let user=req.user
         req.body['id']=req.user.id
@@ -152,8 +160,8 @@ route.post('/editProfile',(req,res)=>{
 
                     ctrl_user.updateUser(req.body)
                         .then((data)=>{
-                                console.log(data)
-                                console.log(req.user.password)
+                                //console.log(data)
+                                //console.log(req.user.password)
                                 if(data[0]===1)
                                 {
                                     let user=req.user
@@ -165,21 +173,21 @@ route.post('/editProfile',(req,res)=>{
 
                                 user['success']=0
                                 user['status']='Oops something went wrong. Please Retry!!!'
-                                res.render('profile',{user,layout:false})
+                                res.render('profile',{user,nav})
                             }
                         )
                 }
                 else{
                     user['success']=0
                     user['status']='Password did not matched'
-                    res.render('profile',{user,layout:false})
+                    res.render('profile',{user,nav})
                 }
             }
             else
             {
                 user['success']=0
                 user['status']='wrong input in confirm password'
-                res.render('profile',{user,layout:false})
+                res.render('profile',{user,nav})
             }
 
         }

@@ -2,10 +2,10 @@ const route=require('express').Router()
 const passport=require('../passport')
 const ctrl=require('../controllers/user')
 route.get('/signin',(r,s)=>{
-    s.render('signin',{layout:false})
+    s.render('signin')
 })
 route.get('/signup',(r,s)=>{
-    s.render('signup',{layout:false})
+    s.render('signup')
 })
 route.post('/signin', passport.authenticate('local', {
     failureRedirect: '/auth/signin'

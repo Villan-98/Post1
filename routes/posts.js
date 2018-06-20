@@ -106,7 +106,7 @@ route.delete('/',(req,res)=>{
     ctrl.deletePost(req.body)
         .then((deleted)=>{
             console.log("item is deleted ")
-          res.redirect('/user/Mypost')
+          res.redirect(`/`+req.user.name+`/Mypost`)
         })
         .catch((err)=>{
             res.status(500).json({message:err})

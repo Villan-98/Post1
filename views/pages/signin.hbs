@@ -12,30 +12,23 @@
 <body>
 
 <div class="container "  >
-    <div class="row">
-        <div class="col-4">
+    <div class="row mt-5">
 
-        </div>
-        <div class=" bg-light col-3 " >
-
-            <form action="#" method="post">
-                <div class="form-group">
-                    <label for="signup_user">Rauth Name</label>
+        <div class=" bg-light col-sm-5 col-md-4 offset-md-4 mt-3" >
+            <form action="#" class="p-4" method="post">
+                <div class="form-group ">
+                    <label for="signup_user">Username</label>
                     <input type="text" class="form-control" id="signup_user" placeholder="Rauth Name" name="username">
                 </div>
-
-
                 <div class="form-group">
                     <label for="signup_con_pass">Password</label>
                     <input type="password" class="form-control" id="signup_con_pass" placeholder="Password" name="password">
                 </div>
-                <input type="submit" class="btn btn-primary" value="SignIn">
+                <input type="submit" class="btn btn-primary offset-4" value="SignIn">
             </form>
+            <a href="/auth/signup" class="offset-3">New User click here</a>
         </div>
-        <div class="col-4">
 
-        </div>
-        <a href="/auth/facebook">Sign In with facebook</a>
     </div>
 
 </div>

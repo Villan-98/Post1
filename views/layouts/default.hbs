@@ -5,6 +5,7 @@
 
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
     <script src="/js/jquery-3.2.1.js"></script>
     <script src="/js/post.js"></script>
     <script src="/js/achievement.js"></script>
@@ -18,28 +19,49 @@
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
-
     <div class="collapse navbar-collapse " id="navbarSupportedContent" >
         <ul class="navbar-nav mr-auto float-left">
-            <li class="nav-item active">
-                <a class="nav-link " href="http://localhost:2400/user/home" style="font-size:15px">Home</a>
-            </li>
-            <li class="nav-item">
+            {{#if nav.name}}
+                <li class="nav-item active">
+                    <a class="nav-link " href="http://localhost:2400/{{nav.name}}/home" style="font-size:15px">Home</a>
+                </li>
+                <li class="nav-item">
 
-                <a class="nav-link " href="http://localhost:2400/user/profile" style="font-size:15px">Profile</a>
-            </li>
-            <li class="nav-item ">
+                    <a class="nav-link " href="http://localhost:2400/{{nav.name}}/profile" style="font-size:15px">Profile</a>
+                </li>
+                <li class="nav-item ">
 
-                <a class="nav-link " href="http://localhost:2400/user/Mypost" style="font-size:15px">Mypost</a>
-            </li>
-            <li class="nav-item">
+                    <a class="nav-link " href="http://localhost:2400/{{nav.name}}/Mypost" style="font-size:15px">Mypost</a>
+                </li>
+                <li class="nav-item">
 
-                <a class="nav-link " href="http://localhost:2400/user/achievement" style="font-size:15px">Achievement</a>
-            </li>
-            <li class="nav-item">
+                    <a class="nav-link " href="http://localhost:2400/{{nav.name}}/achievement" style="font-size:15px">Achievement</a>
+                </li>
+                <li class="nav-item">
 
-                <a class="nav-link " href="http://localhost:2400/user/profile" style="font-size:15px">Notification</a>
-            </li>
+                    <a class="nav-link " href="http://localhost:2400/{{nav.name}}/profile" style="font-size:15px">Notification</a>
+                </li>
+                <li class="nav-item">
+
+                    <a class="nav-link " href="http://localhost:2400/logout" style="font-size:15px">Logout</a>
+                </li>
+                {{else}}
+                <li class="nav-item active">
+                    <a class="nav-link " href="http://localhost:2400/user/home" style="font-size:15px">Features</a>
+                </li>
+                <li class="nav-item">
+
+                    <a class="nav-link " href="http://localhost:2400/auth/signin" style="font-size:15px">Signin</a>
+                </li>
+                <li class="nav-item ">
+
+                    <a class="nav-link " href="http://localhost:2400/auth/signup" style="font-size:15px">Signup</a>
+                </li>
+                <li class="nav-item">
+
+                    <a class="nav-link " href="http://localhost:2400/user/achievement" style="font-size:15px">Leaderboard</a>
+                </li>
+            {{/if}}
         </ul>
     </div>
 </nav>

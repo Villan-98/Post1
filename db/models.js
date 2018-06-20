@@ -85,7 +85,6 @@ Post.hasMany(Like,{foreignKey:{
         primaryKey:true
     }
 })
-
 const Dislike=db.define('dislikes',{
 
     value:{
@@ -98,7 +97,16 @@ const Dislike=db.define('dislikes',{
 },{
     timestamps:false
 })
-
+const url=db.define('url',{
+    userUrl:{
+        type:DataTypes.STRING,
+        allowNull:false
+    },
+    originalUrl:{
+        type:DataTypes.STRING,
+        allowNull:false
+    }
+})
 Dislike.removeAttribute('id')
 Dislike.belongsTo(User,{foreignKey:{
         name:'User_key',
@@ -127,6 +135,7 @@ Post.hasMany(Comment,{foreignKey:{
         allowNull:false
 
     }})
+
 Comment.belongsTo(User,{foreignKey:{
     name:'CUser_key',
         allowNull:false
@@ -137,6 +146,6 @@ db.sync({
 })
     .then(()=>{console.log("database syncronised")})
 exports=module.exports={
-    db,User,Post,Like,Dislike,Comment
+    db,User,Post,Like,Dislike,Comment,url
 
 }
