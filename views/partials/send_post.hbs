@@ -1,43 +1,11 @@
 
     <div class="row">
-        <div class="col">
-                <form action="/post" method="post" enctype="multipart/form-data">
-                    <div class="form-group">
-                        <div class="my-2">
-                            <textarea class="form-control" name="text" placeholder="What's on your Mind" rows="3"></textarea>
-                        </div>
-                        <div>
-                            <!--  <input type="hidden" name="userId" value="{{posts.UserId}}">-->
-                        </div>
-                        <div>
-                            <div class="row">
-                                <div class="col-3 py-2 ">
-                                    <label for="file" class="btn btn-light px-4 py-4git status">Choose Images</label>
-                                    <input type="file" id="file" name="Mypost" class="form-control-file py-4 bg-light"style=" display: none;border: solid #c8cbcf;border-width: thin;border-radius: 5px">
-                                </div>
-                                <div class="col-2">
+        <form action="/upload" class="p-4" method="post">
+            <div class="form-group ">
 
-                                    <button type="submit" class="btn btn-primary px-4 ">Post</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </form>
-                <!--<form action="/post" method="post" enctype="multipart/form-data">
-
-                    <div class="form-group">
-                        <div class="row" style="border: solid #c8cbcf;border-width: thin;border-radius: 5px">
-
-                            <div class="col-3 py-2 ">
-                                <label for="file" class="btn btn-light px-4 py-4git status">Choose Images</label>
-                                <input type="file" id="file" name="Mypost" class="form-control-file py-4 bg-light"style=" display: none;border: solid #c8cbcf;border-width: thin;border-radius: 5px">
-                            </div>
-                            <div class="col-3 my-4">
-                                <button type="submit" class="btn btn-primary px-4 py-2">Upload</button>
-                            </div>
-                        </div>
-                    </div>
-                </form>-->
-        </div>
+                <input type="text" class="form-control" id="signup_user" placeholder="What's on your mind" name="text">
+            </div>
+            <input type="submit" class="btn btn-primary offset-4" value="Upload">
+        </form>
     </div>
 

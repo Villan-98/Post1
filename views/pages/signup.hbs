@@ -1,67 +1,60 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-
-    <link rel="stylesheet" href="/css/bootstrap.css">
-    <script src="/js/jquery-3.2.1.js"></script>
-    <script src="/js/popper.js"></script>
-    <script src="/js/bootstrap.js"></script>
-
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-    <title>Title</title>
-</head>
-<body>
-<div class="container "  >
-
+<div class="container mt-5">
     <div class="row">
-        <div class="col-4">
-
-        </div>
-        <div class=" bg-light col-5 " >
-
+        <div class=" bg-light col-12 " >
             <form action="/auth/signup" method="post">
-                <div class="form-group">
-                    <label for="signup_user">Rauth Name</label>
-                    <input type="text" class="form-control" id="signup_user" placeholder="Rauth Name" name="name">
-                </div>
-
-                {{#if alert1}}
-
+                {{#if alert}}
                     <div class="alert-danger">
-                        {{alert1}}
+                        {{alert}}
                     </div>
                 {{/if}}
-                <div class="form-group">
-                    <label for="signup_email">Email Id</label>
-                    <input type="email" class="form-control" id="signup_email" placeholder="Email Address" name="email">
-                </div>
-                <div class="form-group">
-                    <label for="signup_pass">Password</label>
-                    <input type="password" class="form-control" id="signup_pass" placeholder="Password" name="password">
-                </div>
-
-                {{#if alert2}}
-
-                    <div class="alert-danger">
-                        {{alert2}}
+                <div class="row mt-4">
+                    <div class="form-group offset-md-2 col-4">
+                        <label for="signup_user">Username</label>
+                        <input type="text" class="form-control" id="signup_user" placeholder="Username " name="userName" required>
                     </div>
-                {{/if}}
-                <div class="form-group">
-                    <label for="signup_con_pass">Confirm Password</label>
-                    <input type="password" class="form-control" id="signup_con_pass" placeholder="Password" name="conf_password">
+                    <div class="form-group col-4">
+                        <label for="signup_email">Email Id</label>
+                        <input type="email" class="form-control" id="signup_email" placeholder="Email Address" name="email" required>
+                    </div>
                 </div>
-                <button type="submit" class="btn btn-primary">Submit</button>
+                <div class="row">
+                    <div class="form-group offset-md-2 col-4">
+                        <label for="college" >College Name</label>
+                        <select type="text" name="college"  class="form-control text-center" required>
+                            <option value="">Select Your College</option>
+                            <option value="DTU">Delhi Technological University</option>
+                            <option value="NIT(Delhi)">Maharaja Agresen</option>
+                            <option value="SRCC">Shri Ram College of Commerce</option>
+                            <option value="Hindu College">Hindu College</option>
+                            <option value="NSIT"> Netaji Shubhas Institute of Technological</option>
+                            <option value="IITD">Indian Institute of Technological(Delhi)</option>
+                        </select>
+                        <!--  <input type="text" name="college" class="form-control" id="college" value="{{user.college}}">-->
+                    </div>
+                      <div class="form-group col-4">
+                            <label for="courseYear">Course Year</label>
+                          <select type="text" name="courseYear" is="courseYear" class="form-control text-center" required>
+                              <option value="">Course Year</option>
+                              <option value="I">Ist Year</option>
+                              <option value="II">IInd Year</option>
+                              <option value="III">IIIrd Year</option>
+                              <option value="IV">IV Year</option>
+                              <option value="V"> Vth Year</option>
+                          </select>
+                        </div>
+                </div>
+                    <div class="row">
+                        <div class="form-group offset-2 col-4">
+                            <label for="signup_pass">Password</label>
+                            <input type="password" class="form-control" id="signup_pass" placeholder="Password" name="password"required>
+                        </div>
+                        <div class="form-group col-4">
+                            <label for="signup_con_pass">Confirm Password</label>
+                            <input type="password" class="form-control" id="signup_con_pass" placeholder="Password" name="confPassword" required>
+                        </div>
+                    </div>
+                <button type="submit" class="btn mb-4 offset-5 btn-primary">Signup</button>
             </form>
         </div>
-        <div class="col-4">
-
-        </div>
     </div>
-
 </div>
-</body>
-</html>

@@ -30,22 +30,27 @@ const checkFileType=function(file,cb){
     }
 }
 route.post('/',(req,res)=>{
-    //console.log("reached")
+    if(!req.isAuthenticated())
+    {
+        res.redirect('/auth/signin')
+    }
+    console.log("reached in post upload")
+    console.log(req.user.college)
+   //console.log(req)
+
     req.body['userId']=req.user.id
-
-    console.log(req.user)
-
-    console.log("sjfdslkjflsjfklasjfdklj"+(req.user.id))
-    //console.log("dgjfsjsdfaskfjjh"+req.body.text)
-    console.log(req.header)
-
+    req.body['userCollege']=req.user.college
     if(req.headers['content-type']==='application/x-www-form-urlencoded')
     {
+        console.log(req.body.college)
+        console.log(req.user)
         req.body['img']=0
         ctrl.addPost(req.body)
             .then(()=>{
-                res.redirect('user/home')
+                res.redirect('/'+req.user.username)
 
+            },(err)=>{
+                console.log(err)
             })
             .catch((err)=>{
                 res.status(500).json({message:'oops some error occur'})
@@ -56,7 +61,7 @@ route.post('/',(req,res)=>{
         upload(req,res,(err)=>{
             if(err){
 
-                res.send("ooops")
+                res.send("oops")
             }
             else{
 

@@ -21,36 +21,36 @@
     </button>
     <div class="collapse navbar-collapse " id="navbarSupportedContent" >
         <ul class="navbar-nav mr-auto float-left">
-            {{#if nav.name}}
-                <li class="nav-item active">
-                    <a class="nav-link " href="http://localhost:2400/{{nav.name}}" style="font-size:15px">Home</a>
+            {{#if nav.username}}
+                <li class="nav-item ">
+                    <a class="nav-link " href="http://localhost:2400/{{nav.username}}" style="font-size:15px">Home</a>
                 </li>
                 <li class="nav-item">
 
-                    <a class="nav-link " href="http://localhost:2400/{{nav.name}}/profile" style="font-size:15px">Profile</a>
+                    <a class="nav-link " href="http://localhost:2400/{{nav.username}}/profile" style="font-size:15px">Profile</a>
                 </li>
                 <li class="nav-item ">
 
-                    <a class="nav-link " href="http://localhost:2400/{{nav.name}}/Mypost" style="font-size:15px">Mypost</a>
+                    <a class="nav-link " href="http://localhost:2400/{{nav.username}}/Mypost" style="font-size:15px">Mypost</a>
                 </li>
                 <li class="nav-item">
 
-                    <a class="nav-link " href="http://localhost:2400/{{nav.name}}/achievement" style="font-size:15px">Achievement</a>
+                    <a class="nav-link " href="http://localhost:2400/{{nav.username}}/achievement" style="font-size:15px">Achievement</a>
                 </li>
                 <li class="nav-item">
 
-                    <a class="nav-link " href="http://localhost:2400/{{nav.name}}/profile" style="font-size:15px">Notification</a>
+                    <a class="nav-link " href="http://localhost:2400/{{nav.username}}/profile" style="font-size:15px">Notification</a>
                 </li>
                 <li class="nav-item">
 
                     <a class="nav-link " href="http://localhost:2400/logout" style="font-size:15px">Logout</a>
                 </li>
                 {{else}}
-                <li class="nav-item active">
+                <li class="nav-item ">
                     <a class="nav-link " href="http://localhost:2400/user/home" style="font-size:15px">Features</a>
                 </li>
-                <li class="nav-item">
 
+                <li class="nav-item">
                     <a class="nav-link " href="http://localhost:2400/auth/signin" style="font-size:15px">Signin</a>
                 </li>
                 <li class="nav-item ">

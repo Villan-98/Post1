@@ -10,25 +10,36 @@ const db=new Sequelize(
         dialect:'mysql'
     }
 )
-const User=db.define('user',{
+const User=db.define('Puser',{
     name:{
-        type:DataTypes.STRING
+        type:DataTypes.STRING,
+
     },
     username:{
         type:DataTypes.STRING,
+        allowNull:false
     },
     email:{
         type:DataTypes.STRING,
+        allowNull:false
     },
     password:{
-        type:DataTypes.STRING
+        type:DataTypes.STRING,
+        allowNull:false
     },
     college:{
         type:DataTypes.STRING,
+        allowNull:false
     },
     rights:{
         type:DataTypes.STRING,
-        defaultValue:"you can only send one post"
+    },
+    courseYear:{
+        type:DataTypes.STRING,
+        allowNull:false
+    },
+    googleId:{
+        type:DataTypes.STRING
     }
 })
 const Post=db.define('post',{
@@ -40,8 +51,8 @@ const Post=db.define('post',{
         type:DataTypes.SMALLINT,
         defaultValue:0
     },
-    clgId:{
-      type:DataTypes.SMALLINT,
+    college:{
+      type:DataTypes.STRING,
       allowNull:false
     },
     pic:{
@@ -142,7 +153,8 @@ Comment.belongsTo(User,{foreignKey:{
     }})
 db.sync({
   //force:true
-   // alter:true
+
+  // alter:true
 })
     .then(()=>{console.log("database syncronised")})
 exports=module.exports={

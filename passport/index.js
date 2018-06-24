@@ -11,7 +11,6 @@ passport.deserializeUser(function(userId,done){
     console.log("deserialize"+userId)
     User.findOne({
         where:{id:userId}
-
     })
         .then((user)=>done(null,user))
         .catch((err)=>done(err))

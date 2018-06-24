@@ -26,7 +26,7 @@ exports=module.exports={
             })*/
         return Post.findAll({
             where:{
-                userId:reqQuery.id
+                PuserId:reqQuery.id
             },
             include:[{
                 model:User,
@@ -73,10 +73,12 @@ exports=module.exports={
     }
       ,
     getallpost:async(reqQuery)=>{
-                return Post.findAll({
+                return Post.findAll({where:{
+                    college:reqQuery.college
+                    },
                     include:[{
                         model:User,
-                        attributes:['id','name']
+                        attributes:['id','username']
                     },
                         {
                             model:Like,
@@ -108,17 +110,17 @@ exports=module.exports={
 
         })*/
     },
-    addPost:async(reqQuery)=>{
+    addPost:(reqQuery)=>{
         console.log("ghghghg")
         if(reqQuery.img===0)
         {
 
-            console.log("reached in text and the user id is "+ reqQuery.id)
-            Post.create({
+            console.log("reached in text and the user id is "+ reqQuery.userId)
+            return Post.create({
                 text:reqQuery.text,
-                clgId:1,
+                college:reqQuery.userCollege,
 
-                userId:reqQuery.userId
+                PuserId:reqQuery.userId
             })
         }
         else if(reqQuery.img===1)

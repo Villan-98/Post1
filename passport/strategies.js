@@ -5,7 +5,7 @@ const localStrategy = new LocalStrategy(
     (username, password, done) => {
         User.findOne({
             where: {
-                name: username
+                username: username
             }
         }).then((user) => {
 

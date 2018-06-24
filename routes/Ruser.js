@@ -42,25 +42,28 @@ route.get('/',(req,res)=>{                             //active post button is r
         res.redirect('/auth/signin')
     }
     else {
-        console.log("username is"+req.user.username)
+        //console.log("username is"+req.user.username)
         ctrl_post.getallpost(req.user)
             .then((posts)=>{
                 ctrl_post.HVPost()
                     .then((data)=>{
-                        console.log("data zero is"+data)        //why is printing object object in console
+                        //console.log("data zero is"+data)        //why is printing object object in console
                         posts['UserId']=req.user.id
                         posts["UserName"]=req.user.name
                         posts['clg']=req.user.college
-                        posts['active']=req.active
-                        console.log("active is "+req.active)
-
-                        console.log(data[0].dataValues['user'].dataValues['name'])
-                        posts['hv_post']=data[0].dataValues['user'].dataValues['name']
-                        console.log(posts.hv_post)
-                        //res.status(201).json(data)
+                       // posts['active']=req.active
+                        //console.log("active is "+req.active)
+                        if(data.dataValues)
+                        {
+                            //console.log(data)
+                            //console.log(data[0].dataValues['user'].dataValues['name'])
+                            posts['hv_post']=data[0].dataValues['user'].dataValues['name']
+                            //console.log(posts.hv_post)
+                            //res.status(201).json(data)
+                        }
                         let nav=req.user
-                        console.log("nav is ")
-                        console.log(nav)
+                        console.log(posts.Puser)
+                       // res.send(posts)
                         res.render('abc',{posts,nav})
                     })
             })
@@ -114,7 +117,7 @@ route.delete('/Mypost',(req,res)=>{
 route.get('/profile',(req,res)=>{
     if(!req.user)
     {
-        res.redirect('https://wakatime.com/project/health_care?start=2018-06-09&end=2018-06-15')
+        res.redirect('/auth/signin')
     }
     else{
         console.log("in the user")

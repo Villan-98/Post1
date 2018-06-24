@@ -1,11 +1,12 @@
 const User=require('../db/models').User
 exports=module.exports= {
-    add_user:(reqQuery)=> {
-
+    add_user:(reQuery)=> {
         return User.create({
-            name: reqQuery.name,
-            password: reqQuery.password,
-            email:reqQuery.email
+            username: reQuery.userName,
+            password: reQuery.password,
+            email:reQuery.email,
+            college:reQuery.college,
+            courseYear:reQuery.courseYear
         })
     },
     validate_user:async(reqQuery)=>{
@@ -23,6 +24,13 @@ exports=module.exports= {
            }
        )
 
+    },
+    checkUser:(reQuery)=>{
+        return User.findOne({
+            where:{
+                username:reQuery.userName
+            }
+        })
     },
     getUser:async(reqQuery)=>{
         return User.findOne({

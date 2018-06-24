@@ -26,7 +26,8 @@
                             <div class="col-4 offset-2">
                                 <div class="form-group">
                                     <label for="college" >College Name</label>
-                                    <input type="text" name="college" class="form-control" id="college" value="{{user.college}}">
+
+                                  <input type="text" name="college" class="form-control " disabled id="college" value="{{user.college}}">
                                 </div>
                             </div>
 
@@ -48,8 +49,15 @@
 
                     <div class="row">
                         <div class="form-group col-md-4 offset-2">
-                            <label for="newP" >Contact Number</label>
-                            <input type="number" name="contact" class="form-control" id="contact" >
+                            <label for="courseYear" >Course Year</label>
+                            <select type="text" name="courseYear" is="courseYear" class="form-control text-center">
+                                <option value="">Course Year</option>
+                                <option value="I">Ist Year</option>
+                                <option value="II">IInd Year</option>
+                                <option value="III">IIIrd Year</option>
+                                <option value="IV">IV Year</option>
+                                <option value="V"> Vth Year</option>
+                            </select>
                         </div>
                         <div class="form-group col-md-4">
                             <label for="oldP" >Old Password</label>
