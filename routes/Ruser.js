@@ -4,7 +4,8 @@ const ctrl_post=require('../controllers/posts')
 const ctrl_achieve=require('../controllers/achievements')
 const liked_post=require('../controllers/like')
 const chk=require('../controllers/achievements')
-
+const dateStore=require('date-store')
+const store=new dateStore()
 function ActivePostButton(req,res,next){
         ctrl_post.getpost(req.user)
         .then((post)=>{
@@ -42,29 +43,32 @@ route.get('/',(req,res)=>{                             //active post button is r
         res.redirect('/auth/signin')
     }
     else {
-        //console.log("username is"+req.user.username)
         ctrl_post.getallpost(req.user)
             .then((posts)=>{
-                ctrl_post.HVPost()
+                console.log("first data ha came")
+                ctrl_achieve.GlHScorer(req.user)
                     .then((data)=>{
-                        //console.log("data zero is"+data)        //why is printing object object in console
+                       // console.log("data zero is"+data)        //why is printing object object in console
+                        let ranker={}
+                        ranker['global']=data.Puser
+                        ctrl_achieve.ClGScorer(req.user)
+                            .then((data)=>{
+                                ranker['college']=data.Puser
+                                ctrl_achieve.ClBScorer(req.user)
+                                    .then((data)=>{
+                                        ranker['clBatch']=data.Puser
+                                        let date=(store.date('1 week ago'))
+                                            console.log(date)
+                                        let nav=req.user
+                                        //console.log(posts.Puser)
+                                        // res.send(posts)
+                                        res.render('abc',{posts,nav,ranker})
+                                    })
+                            })
                         posts['UserId']=req.user.id
-                        posts["UserName"]=req.user.name
-                        posts['clg']=req.user.college
-                       // posts['active']=req.active
-                        //console.log("active is "+req.active)
-                        if(data.dataValues)
-                        {
-                            //console.log(data)
-                            //console.log(data[0].dataValues['user'].dataValues['name'])
-                            posts['hv_post']=data[0].dataValues['user'].dataValues['name']
-                            //console.log(posts.hv_post)
-                            //res.status(201).json(data)
-                        }
-                        let nav=req.user
-                        console.log(posts.Puser)
-                       // res.send(posts)
-                        res.render('abc',{posts,nav})
+                        //posts["UserName"]=req.user.name
+                        posts['college']=req.user.college
+
                     })
             })
             .catch((err)=>{
@@ -84,7 +88,7 @@ route.get('/MyPost',ActivePostButton,(req,res)=>{
     if(!req.user){
         res.redirect('/auth/signin')
     }
-    console.log("req user is "+req.user.name)
+    console.log("req user is "+req.user.username)
     ctrl_post.getpost(req.user)
         .then((posts)=>{
            // chk.achieved(posts)
@@ -155,8 +159,7 @@ route.post('/editProfile',(req,res)=>{
         res.redirect('/auth/signin')
     }
     else{
-        let nav=req.user
-        console.log(req.body)
+        console.log("in the post of edit profile")
         let user=req.user
         req.body['id']=req.user.id
         console.log("req.user"+req.user.password)
@@ -169,7 +172,6 @@ route.post('/editProfile',(req,res)=>{
                 console.log((req.user.password).toString())
                 if(req.body.old_pass===(req.user.password).toString())
                 {
-
                     ctrl_user.updateUser(req.body)
                         .then((data)=>{
                                 //console.log(data)
@@ -205,8 +207,9 @@ route.post('/editProfile',(req,res)=>{
         }
         else{
             console.log("do not change p")
-
+            console.log(req.body)
             req.body['new_pass']=req.body.password
+            req.body['id']=req.user.id
             ctrl_user.updateUser(req.body)
                 .then((data)=>{
                         if(data[0]===1){

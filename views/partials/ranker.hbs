@@ -2,11 +2,41 @@
     <h3>
         Leader Board
     </h3>
-    <div class="row">
-        <div class="col" id="HV">
-            <div>
-                Highest Scorer is {{posts.hv_post}}
+    <div class="row offset-1">
+        <h5>Highest Likes on a Single Post</h5>
+        <div  id="OHV">
+            <div class="py-1">
+                <a href="/{{ranker.global.username}}/uploads">
+
+                    Globally  Highest Scorer is {{ranker.global.username}}
+
+                </a>
             </div>
+            <div class="py-1">
+                <a href="/{{ranker.college.username}}/uploads">
+
+                    In College Highest Scorer is {{ranker.college.username}}
+                </a>
+            </div >
+            <div class="py-1">
+                <a href="/{{ranker.college.username}}/uploads">
+                    In Your Batch Top scorer is  {{ranker.clBatch.username}}
+                </a>
+            </div>
+        </div>
+
+        <div>
+            <h5>Last Week's Top Scorer</h5>
+            <div class="py-1">
+
+            </div>
+            <div class="py-1">
+
+            </div>
+            <div class="py-1">
+
+            </div>
+
         </div>
     </div>
 </div>

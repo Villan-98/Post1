@@ -47,13 +47,14 @@ exports=module.exports= {
             }
         })
     },
-    updateUser:async(reqQuery)=>{
+    updateUser:(reqQuery)=>{
+        console.log("in the update user"+reqQuery.id)
         return User.update({
             name:reqQuery.name,
             username:reqQuery.username,
             college:reqQuery.college,
-            password:reqQuery.new_pass
-
+            password:reqQuery.new_pass,
+            courseYear:reqQuery.courseYear
         },
          {
             where:{

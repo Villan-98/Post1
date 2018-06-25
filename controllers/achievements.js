@@ -30,5 +30,39 @@ exports=module.exports={
             }
         })
 
+    },
+    ClGScorer:(reQuery)=>{
+        return Posts.findOne({
+            where:{
+                college:reQuery.college
+            },order:[['vote','DESC']],
+            include:[{
+                model:User,
+                attribute:['id','username']
+            }]
+        })
+    },
+    GlHScorer:(reQuery)=>{
+        return Posts.findOne({
+            order:[['vote','DESC']],
+            include:[{
+                model:User,
+                attribute:['id','username']
+            }]
+        })
+    },
+    ClBScorer:(reQuery)=>{
+        return Posts.findOne({
+            where:{
+                college:reQuery.college,
+            },order:[['vote','DESC']],
+            include:[{
+                model:User,
+                attribute:['id','username'],
+                where:{
+                    courseYear:reQuery.courseYear
+                }
+            }]
+        })
     }
 }

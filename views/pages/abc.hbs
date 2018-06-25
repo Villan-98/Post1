@@ -1,10 +1,13 @@
 <div class="row">
 
-{{#if posts.clg}}
-    <div class="col-8 offset-2">
+{{#if posts.college}}
+    <div class="offset-2">
     {{>send_post}}
     {{>searched_post}}
     </div>
+
+        {{>ranker}}
+
 {{else}}
     <div class="col" >
         <div class="row">
