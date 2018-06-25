@@ -50,13 +50,22 @@ route.get('/',(req,res)=>{                             //active post button is r
                     .then((data)=>{
                        // console.log("data zero is"+data)        //why is printing object object in console
                         let ranker={}
-                        ranker['global']=data.Puser
+                        if(data)
+                        {
+                            ranker['global']=data.Puser
+                        }
                         ctrl_achieve.ClGScorer(req.user)
                             .then((data)=>{
-                                ranker['college']=data.Puser
+                                if(data)
+                                {
+                                    ranker['college']=data.Puser
+                                }
                                 ctrl_achieve.ClBScorer(req.user)
                                     .then((data)=>{
-                                        ranker['clBatch']=data.Puser
+                                        if(data)
+                                        {
+                                            ranker['clBatch']=data.Puser
+                                        }
                                         let date=(store.date('1 week ago'))
                                             console.log(date)
                                         let nav=req.user

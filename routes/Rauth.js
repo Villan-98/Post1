@@ -10,6 +10,11 @@ const checkEmpty=function(data){
 route.get('/signin',(r,s)=>{
     s.render('signin')
 })
+route.get('/google',passport.authenticate('google', { scope: ['https://www.googleapis.com/auth/plus.login'] }));
+route.get('/google/callback',passport.authenticate('google', { failureRedirect: '/signin' }),
+    function(req, res) {
+        res.redirect('/'+req.user.username+'/editProfile');
+    })
 route.get('/signup',(r,s)=>{
     s.render('signup')
 })

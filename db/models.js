@@ -25,18 +25,17 @@ const User=db.define('Puser',{
     },
     password:{
         type:DataTypes.STRING,
-        allowNull:false
+
     },
     college:{
         type:DataTypes.STRING,
-        allowNull:false
     },
     rights:{
         type:DataTypes.STRING,
     },
     courseYear:{
         type:DataTypes.STRING,
-        allowNull:false
+
     },
     googleId:{
         type:DataTypes.STRING
@@ -154,7 +153,7 @@ Comment.belongsTo(User,{foreignKey:{
 db.sync({
   //force:true
 
-  // alter:true
+   //alter:true
 })
     .then(()=>{console.log("database syncronised")})
 exports=module.exports={

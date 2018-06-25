@@ -3,7 +3,6 @@ const session=require('express-session')
 const passport=require('./passport')
 const path=require('path')
 const hbs=require('express-hbs')
-const cookieParser=require('cookie-parser')
 const sessionStore=require('express-session-sequelize')(session.Store)
 const database=require('./db/models').db
 const http = require('http')
@@ -16,7 +15,8 @@ const server = http.createServer(app)
 const io = socketio(server)
 
 const sequelizeSessionStore=new sessionStore({
-    db:database
+    db:database,
+    expiration:100
 })
 app.use(express.json())
 app.use(express.urlencoded({extended: true}))
@@ -93,7 +93,7 @@ io.on('connection',function(socket){
         }
     })
 })
-server.listen(2400,()=>{
+server.listen(8888,()=>{
     console.log("listening to port 2400")
 })
 
