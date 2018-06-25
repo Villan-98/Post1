@@ -3,7 +3,9 @@ const session=require('express-session')
 const passport=require('./passport')
 const path=require('path')
 const hbs=require('express-hbs')
-
+const cookieParser=require('cookie-parser')
+const sessionStore=require('express-session-sequelize')(session.Store)
+const database=require('./db/models').db
 const http = require('http')
 const socketio = require('socket.io')
 
@@ -13,13 +15,16 @@ const app = express()
 const server = http.createServer(app)
 const io = socketio(server)
 
-
+const sequelizeSessionStore=new sessionStore({
+    db:database
+})
 app.use(express.json())
 app.use(express.urlencoded({extended: true}))
 app.use(session({
     secret:'something vey secret',
     resave:false,
-    saveUninitialized:false
+    saveUninitialized:false,
+    store:sequelizeSessionStore
 }))
 app.engine('hbs',hbs.express4({
     defaultLayout:path.join(__dirname,'views/layouts/default'),
