@@ -7,60 +7,36 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
     <script src="/js/jquery-3.2.1.js"></script>
-    <script src="/js/post.js"></script>
-    <script src="/js/achievement.js"></script>
-    <script src="/js/comment.js"></script>
-    <script src="/socket.io/socket.io.js"></script>
-    <script src="../js/chat.js"></script>
-    <title>Title</title>
+    <script src="/js/viewJs/post.js"></script>
+    <script src="/js/viewJs/achievement.js"></script>
+    <script src="/js/viewJs/comment.js"></script>
+    <!--<script src="/socket.io/socket.io.js"></script>
+    <script src="/js/viewJs/chat.js"></script>-->
+    <title>{{title}}</title>
 </head>
 <body>
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse " id="navbarSupportedContent" >
-        <ul class="navbar-nav mr-auto float-left">
+<nav class="navbar navbar-dark bg-dark justify-content-end">
+
             {{#if nav.username}}
-                <li class="nav-item ">
-                    <a class="nav-link " href="http://localhost:8888/{{nav.username}}" style="font-size:15px">Home</a>
-                </li>
-                <li class="nav-item">
+                    <a class="nav-link px-4" href="http://localhost:8888/{{nav.username}}" style="font-size:15px">Home</a>
 
-                    <a class="nav-link " href="http://localhost:8888/{{nav.username}}/profile" style="font-size:15px">Profile</a>
-                </li>
-                <li class="nav-item ">
 
-                    <a class="nav-link " href="http://localhost:8888/{{nav.username}}/Mypost" style="font-size:15px">Mypost</a>
-                </li>
-                <li class="nav-item">
+                    <a class="nav-link px-4" href="http://localhost:8888/{{nav.username}}/profile" style="font-size:15px">Profile</a>
 
-                    <a class="nav-link " href="http://localhost:8888/{{nav.username}}/achievement" style="font-size:15px">Achievement</a>
-                </li>
-                <li class="nav-item">
+                    <a class="nav-link px-4" href="http://localhost:8888/{{nav.username}}/Mypost" style="font-size:15px">Mypost</a>
 
-                    <a class="nav-link " href="http://localhost:8888/{{nav.username}}/profile" style="font-size:15px">Notification</a>
-                </li>
-                <li class="nav-item">
+                    <a class="nav-link px-4" href="http://localhost:8888/{{nav.username}}/achievement" style="font-size:15px">Achievement</a>
 
-                    <a class="nav-link " href="http://localhost:8888/logout" style="font-size:15px">Logout</a>
-                </li>
+                    <a class="nav-link px-4" href="http://localhost:8888/{{nav.username}}/profile" style="font-size:15px">Notification</a>
+
+                    <a class="nav-link px-4" href="http://localhost:8888/logout" style="font-size:15px">Logout</a>
+
                 {{else}}
-                <li class="nav-item ">
-                    <a class="nav-link " href="http://localhost:8888/user/home" style="font-size:15px">Features</a>
-                </li>
+                    <a class="nav-link px-4" href="http://localhost:8888/user/home" style="font-size:15px">Features</a>
+                    <a class="nav-link  px-4" href="http://localhost:8888/auth/signin" style="font-size:15px">Signin</a>
 
-                <li class="nav-item">
-                    <a class="nav-link " href="http://localhost:8888/auth/signin" style="font-size:15px">Signin</a>
-                </li>
-                <li class="nav-item ">
-
-                    <a class="nav-link " href="http://localhost:8888/auth/signup" style="font-size:15px">Signup</a>
-                </li>
-                <li class="nav-item">
-
-                    <a class="nav-link " href="http://localhost:8888/user/achievement" style="font-size:15px">Leaderboard</a>
-                </li>
+                    <a class="nav-link px-4" href="http://localhost:8888/auth/signup" style="font-size:15px">Signup</a>
+                    <a class="nav-link px-4" href="http://localhost:8888/user/achievement" style="font-size:15px">Leaderboard</a>
             {{/if}}
         </ul>
     </div>

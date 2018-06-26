@@ -2,27 +2,38 @@
 <div class="container "  >
     <div class="row mt-5 ">
 
-        <div class="  col-sm-5 col-md-4 offset-md-4 mt-3" >
-            <form action="#" class="p-4" method="post">
-                <div class="form-group ">
+        <div class="col-sm-5 col-md-4 offset-md-4 mt-3" style="background:rgba(0,0,0,0.5);border-radius:10%">
+            <form action="#" class="p-4 " method="post">
+                <div class="form-group">
                     <label for="signup_user">Username</label>
                     <input type="text" class="form-control" id="signup_user" placeholder="Username" name="username">
                 </div>
-                <div class="form-group">
+                <div class="form-group ">
                     <label for="signup_con_pass">Password</label>
                     <input type="password" class="form-control" id="signup_con_pass" placeholder="Password" name="password">
                 </div>
-                <input type="submit" class="btn btn-primary offset-4" value="SignIn">
+                <input type="submit" class="btn btn-primary offset-4" value=" SignIn ">
             </form>
+            <div class="" >
+                <a href="/auth/google"><input class="offset-3 px-2 btn btn-danger btn-sm" type="button" value="Sign in with Google+"></a>
+            </div>
+            <div class="pt-2">
+                <a href="/auth/signup" class="offset-3 text-white" >New User click here</a>
+            </div>
+        </div>
+        <div class="col-12">
+        </div>
+        <div class="py-2 px-2 col-12 ">
         </div>
 
     </div>
 
-    <div>
-        <a href="/auth/google"><input class=" col-md-2 mt-2 offset-md-5 btn btn-danger btn-sm" type="button" value="Sign in with Google+"></a>
-    </div>
-    <div class="py-2 px-2">
-        <a href="/auth/signup" class="offset-5">New User click here</a>
-    </div>
 
 </div>
+
+<style>
+    body{
+        background: url("/assets/sign2.jpg");
+        background-size: cover;
+    }
+</style>
