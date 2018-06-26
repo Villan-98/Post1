@@ -66,8 +66,8 @@ route.get('/',(req,res)=>{                             //active post button is r
                                         {
                                             ranker['clBatch']=data.Puser
                                         }
-                                        let date=(store.date('1 week ago'))
-                                            console.log(date)
+                                        let date=(store.date('3 week ago'))
+                                        console.log(date.toLocaleDateString())
                                         let nav=req.user
                                         //console.log(posts.Puser)
                                         // res.send(posts)
