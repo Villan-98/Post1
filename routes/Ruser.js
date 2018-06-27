@@ -168,11 +168,9 @@ route.post('/editProfile',(req,res)=>{
         res.redirect('/auth/signin')
     }
     else{
-        console.log("in the post of edit profile")
+        let nav=req.user
         let user=req.user
         req.body['id']=req.user.id
-        console.log("req.user"+req.user.password)
-        //console.log("user is"+user)
         if(req.body.changeP)
         {
             console.log("changeP")
@@ -195,45 +193,40 @@ route.post('/editProfile',(req,res)=>{
                         .catch((err)=>{
 
                                 user['success']=0
-                                user['status']='Oops something went wrong. Please Retry!!!'
-                                res.render('profile',{user,nav})
+                                user['alert']='Oops something went wrong. Please Retry!!!'
+                                res.render('editProfile',{user,nav})
                             }
                         )
                 }
                 else{
                     user['success']=0
-                    user['status']='Password did not matched'
-                    res.render('profile',{user,nav})
+                    user['alert']='Password did not matched'
+                    res.render('editProfile',{user,nav})
                 }
             }
             else
             {
                 user['success']=0
-                user['status']='wrong input in confirm password'
-                res.render('profile',{user,nav})
+                user['alert']='wrong input in confirm password'
+                res.render('editProfile',{user,nav})
             }
 
         }
         else{
-            console.log("do not change p")
-            console.log(req.body)
-            req.body['new_pass']=req.body.password
+            req.body['new_pass']=req.user.password
             req.body['id']=req.user.id
             ctrl_user.updateUser(req.body)
                 .then((data)=>{
                         if(data[0]===1){
-
-                            let user=req.user
-                            console.log(req.user)
-                            user['success']=1
-                            user['status']='Profile Updated'
+                            ctrl_user.getUser(req.user)
+                                .then((user)=>{
+                                    res.redirect('/'+user.username+'/profile')
+                                })
                         }
                     }
                 )
                 .catch((err)=>{
-                        console.log((err)=>{
-                            console.log(err)
-                        })
+                        console.log(err)
                     }
                 )
         }

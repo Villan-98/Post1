@@ -32,7 +32,7 @@ exports=module.exports= {
             }
         })
     },
-    getUser:async(reqQuery)=>{
+    getUser:(reqQuery)=>{
         return User.findOne({
             where:{
                 id:parseInt(reqQuery.id)
@@ -48,10 +48,10 @@ exports=module.exports= {
         })
     },
     updateUser:(reqQuery)=>{
-        console.log("in the update user"+reqQuery.id)
+        console.log("in the update user")
+        console.log(reqQuery)
         return User.update({
             name:reqQuery.name,
-            username:reqQuery.username,
             college:reqQuery.college,
             password:reqQuery.new_pass,
             courseYear:reqQuery.courseYear

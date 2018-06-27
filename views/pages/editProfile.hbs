@@ -1,7 +1,7 @@
 
 
 
-        <div class="container bg-light mt-4 pb-2">
+        <div class="container  mt-4 pb-2" style="background:rgba(0,0,0,0.5)">
             <div class="row">
 
                 <div class="col-md-10 offset-1">
@@ -10,7 +10,21 @@
                 </span>
                 </div>
             </div>
-                <form action="/user/editProfile" method="post" >
+            {{#if user.success}}
+
+                <div class="alert alert-success offset-2 col-8 text-center" role="alert">
+                    Detail updated
+                </div>
+            {{else}}
+                {{#if user.alert}}
+
+                    <div class="alert alert-danger offset-2 col-8 text-center" role="alert">
+                        {{user.alert}}
+                    </div>
+                {{/if}}
+            {{/if}}
+
+            <form action="/user/editProfile" method="post" >
                         <div class="row">
                             <div class="form-group col-md-4  offset-2">
                                 <label for="exampleFormControlFile1" >Name</label>
@@ -18,7 +32,7 @@
                             </div>
                             <div class="form-group col-md-4 ">
                                 <label for="username" >Username</label>
-                                <input type="text" name="username" class="form-control" id="username" value="{{user.username}}">
+                                <input type="text" name="username" class="form-control" id="username" disabled value="{{user.username}}">
                             </div>
                         </div>
                         <div class="row">
@@ -37,21 +51,12 @@
                             </div>
 
                         </div>
-                        {{#if user.success}}
-                        {{else}}
-                            {{#if user.status}}
-
-                            <div class="alert alert-danger" role="alert">
-                                {{user.status}}
-                            </div>
-                            {{/if}}
-                        {{/if}}
 
                     <div class="row">
                         <div class="form-group col-md-4 offset-2">
                             <label for="courseYear" >Course Year</label>
                             <select type="text" name="courseYear" is="courseYear" class="form-control text-center">
-                                <option value="">Course Year</option>
+                                <option value="{{user.courseYear}}">Course Year</option>
                                 <option value="I">Ist Year</option>
                                 <option value="II">IInd Year</option>
                                 <option value="III">IIIrd Year</option>
@@ -76,7 +81,7 @@
                         </div>
                         <div class="form-group">
                             <div class="form-check offset-2">
-                                <input class="form-check-input" type="checkbox" name="changeP"id="checkchange">
+                                <input class="form-check-input" type="checkbox" name="changeP" id="checkchange">
                                 <label class="form-check-label" for="checkchange">
                                     Check it if you want to change password
                                 </label>
@@ -86,3 +91,10 @@
                     </form>
         </div>
 
+        <style>
+            body{
+                background: url("/assets/edit2.jpg");
+                background-size: cover;
+                background-repeat:no-repeat ;
+            }
+        </style>
