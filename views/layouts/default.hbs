@@ -18,6 +18,9 @@
 <nav class="navbar navbar-dark bg-dark justify-content-end">
 
             {{#if nav.username}}
+                <a class="btn-primary btn" href="../{{nav.username}}/profile">
+                     Hi {{nav.username}}!
+                </a>
                     <a class="nav-link px-4" href="http://localhost:8888/{{nav.username}}" style="font-size:15px">Home</a>
 
 

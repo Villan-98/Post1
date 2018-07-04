@@ -1,3 +1,5 @@
 public/upload
 node_modules/
 .idea/
+config.json
+dateStore.json
