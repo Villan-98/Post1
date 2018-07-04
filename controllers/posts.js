@@ -119,7 +119,7 @@ exports=module.exports={
             return Post.create({
                 text:reqQuery.text,
                 college:reqQuery.userCollege,
-
+                courseYear:reqQuery.courseYear,
                 PuserId:reqQuery.userId
             })
         }

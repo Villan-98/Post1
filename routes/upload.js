@@ -40,6 +40,7 @@ route.post('/',(req,res)=>{
 
     req.body['userId']=req.user.id
     req.body['userCollege']=req.user.college
+    req.body['courseYear']=req.user.courseYear
     if(req.headers['content-type']==='application/x-www-form-urlencoded')
     {
         console.log(req.body.college)

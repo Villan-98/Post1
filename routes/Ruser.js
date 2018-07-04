@@ -4,6 +4,7 @@ const ctrl_post=require('../controllers/posts')
 const ctrl_achieve=require('../controllers/achievements')
 const liked_post=require('../controllers/like')
 const chk=require('../controllers/achievements')
+const ctrlRanker=require('../controllers/ranker')
 const dateStore=require('date-store')
 const store=new dateStore()
 function ActivePostButton(req,res,next){
@@ -45,7 +46,14 @@ route.get('/',(req,res)=>{                             //active post button is r
     else {
         ctrl_post.getallpost(req.user)
             .then((posts)=>{
-                console.log("first data ha came")
+
+                ctrlRanker.getRanker(req.user)
+                    .then((ranker)=>{
+                        posts['college']=req.user.college
+                        let nav=req.user
+                        res.render('abc',{nav,ranker,posts})
+                    })
+                /*
                 ctrl_achieve.GlHScorer(req.user)
                     .then((data)=>{
                        // console.log("data zero is"+data)        //why is printing object object in console
@@ -74,11 +82,8 @@ route.get('/',(req,res)=>{                             //active post button is r
                                         res.render('abc',{posts,nav,ranker})
                                     })
                             })
-                        posts['UserId']=req.user.id
-                        //posts["UserName"]=req.user.name
-                        posts['college']=req.user.college
 
-                    })
+                    })*/
             })
             .catch((err)=>{
                 res.status(200).json({message:"cannot fetch all post"})

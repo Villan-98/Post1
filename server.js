@@ -16,7 +16,6 @@ const io = socketio(server)
 
 const sequelizeSessionStore=new sessionStore({
     db:database,
-    expiration:100
 })
 app.use(express.json())
 app.use(express.urlencoded({extended: true}))

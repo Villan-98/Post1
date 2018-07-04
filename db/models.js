@@ -10,6 +10,31 @@ const db=new Sequelize(
         dialect:'mysql'
     }
 )
+const College=db.define('college',{
+    collegeName:{
+        type:DataTypes.STRING
+    }
+})
+const Ranker=db.define('ranker',{
+    username:{
+        type:DataTypes.STRING
+    },
+    scope:{
+        type:DataTypes.STRING,
+        allowNull:false,
+    },
+    period:{
+        type:DataTypes.STRING,
+        allowNull:false,
+    },
+    role:{
+        type:DataTypes.STRING,
+        allowNull:false,
+    },
+    courseYear:{
+        type:DataTypes.INTEGER,
+    }
+})
 const User=db.define('Puser',{
     name:{
         type:DataTypes.STRING,
@@ -60,6 +85,10 @@ const Post=db.define('post',{
     },
     address:{
         type:DataTypes.STRING
+    },
+    courseYear:{
+        type:DataTypes.STRING,
+        allowNull:false
     }
 
 })
@@ -152,11 +181,10 @@ Comment.belongsTo(User,{foreignKey:{
     }})
 db.sync({
   //force:true
-
-   //alter:true
+    //alter:true
 })
     .then(()=>{console.log("database syncronised")})
 exports=module.exports={
-    db,User,Post,Like,Dislike,Comment,url
+    db,User,Post,Like,Dislike,Comment,url,Ranker,College
 
 }

@@ -2,6 +2,7 @@ const Posts=require('../db/models').Post
 const Comment=require('../db/models').Comment
 const User=require('../db/models').User
 const sequelize=require('sequelize')
+const Op=sequelize.Op
 exports=module.exports={
     getHVPost:async(reqQuery)=>{
        return Posts.findOne({
@@ -31,11 +32,37 @@ exports=module.exports={
         })
 
     },
+    /////////Admin functions to determine the rank
     ClGScorer:(reQuery)=>{
+        Posts.findOne({
+
+        })
         return Posts.findOne({
             where:{
-                college:reQuery.college
+                college:reQuery.college,
+                /*vote:{
+                    $gt:0
+                }*/
             },order:[['vote','DESC']],
+            include:[{
+                model:User,
+                attribute:['id','username']
+            }]
+        })
+    },
+    CHW:(reQuery)=>{
+        return Posts.findOne({
+            where:{
+                college:reQuery.college,
+                createdAt:{
+                    [Op.gte]:reQuery.lastUpdation,
+                    [Op.lte]:reQuery.nextUpdation
+                },
+                vote:{
+                    $gt:0
+                }
+            },
+            order:[['vote','DESC']],
             include:[{
                 model:User,
                 attribute:['id','username']
@@ -44,6 +71,29 @@ exports=module.exports={
     },
     GlHScorer:(reQuery)=>{
         return Posts.findOne({
+            where:{
+              vote:{
+                  $gt:0
+              }
+            },
+            include:[{
+                model:User,
+                attribute:['id','username']
+            }],
+            order:[['vote','DESC']],
+        })
+    },
+    GHW:(reQuery)=>{
+        return Posts.findOne({
+            where:{
+                createdAt:{
+                    [Op.gte]:reQuery.lastUpdation,
+                    [Op.lte]:reQuery.nextUpdation
+                },
+                vote:{
+                    $gt:0
+                }
+            },
             order:[['vote','DESC']],
             include:[{
                 model:User,
@@ -55,6 +105,7 @@ exports=module.exports={
         return Posts.findOne({
             where:{
                 college:reQuery.college,
+                //courseYear:reQuery.courseYear
             },order:[['vote','DESC']],
             include:[{
                 model:User,
@@ -64,5 +115,36 @@ exports=module.exports={
                 }
             }]
         })
-    }
+    },
+    BHT:(reQuery)=>{
+        return Posts.findOne({
+            where:{
+                college:reQuery.college,
+                courseYear:reQuery.courseYear,
+
+            },order:[['vote','DESC']],
+            include:[{
+                model:User,
+                attribute:['id','username']
+            }]
+        })
+    },
+    BHW:(reQuery)=>{                              //BHW
+    return Posts.findOne({
+        where:{
+            college:reQuery.college,
+            createdAt:{
+                [Op.gte]:reQuery.lastUpdation,
+                [Op.lte]:reQuery.nextUpdation
+            },
+            courseYear:reQuery.courseYear
+
+        },order:[['vote','DESC']],
+        include:[{
+            model:User,
+            attribute:['id','username'],
+
+        }]
+    })
+}
 }
