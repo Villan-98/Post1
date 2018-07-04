@@ -23,7 +23,7 @@ $.patch=function(url,data,callback){
     })
 }
 $.post=function(url,data,callback){
-    console.log("reachig in the post")
+    //console.log("reachig in the post")
     return $.ajax({
         url:url,
         type:'POST',
@@ -32,7 +32,7 @@ $.post=function(url,data,callback){
     })
 }
 $(function(){
-    console.log("hi")
+   // console.log("hi")
     function refreshPage(data,postId){
         let Id='C'+postId
         console.log(Id)
@@ -107,11 +107,11 @@ $(function(){
 
     }
    window.deletePost= function(postId){
-        console.log("deletion clicked")
+        //console.log("deletion clicked")
        let body={
            postId:postId
        }
-        $.delete(`/post`,body,function(){
+        $.delete(`/upload`,body,function(){
         location.reload(true)
        })
    }

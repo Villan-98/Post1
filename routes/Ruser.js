@@ -3,10 +3,8 @@ const ctrl_user=require('../controllers/user')
 const ctrl_post=require('../controllers/posts')
 const ctrl_achieve=require('../controllers/achievements')
 const liked_post=require('../controllers/like')
-const chk=require('../controllers/achievements')
 const ctrlRanker=require('../controllers/ranker')
-const dateStore=require('date-store')
-const store=new dateStore()
+
 function ActivePostButton(req,res,next){
         ctrl_post.getpost(req.user)
         .then((post)=>{
@@ -105,18 +103,15 @@ route.get('/MyPost',ActivePostButton,(req,res)=>{
     console.log("req user is "+req.user.username)
     ctrl_post.getpost(req.user)
         .then((posts)=>{
+            ctrlRanker.getRanker(req.user)
+                .then((ranker)=>{
+
+                    let nav=req.user
+                    let delButton=true
+                    //res.send(posts)
+                    res.render('post',{posts,nav,delButton,ranker})
+                })
            // chk.achieved(posts)
-            let nav=req.user
-          //  chk.leader()
-            console.log("reched in post &")
-            posts['UserId']=req.user.id
-            posts["username"]=req.user.name
-            posts['active']=req.active
-            posts['college']=req.user.college
-            posts['rights']=req.user.rights
-            let delButton=true
-            //res.send(posts)
-             res.render('post',{posts,nav,delButton})
         })
         .catch((err)=>{
             console.log("error detected")
