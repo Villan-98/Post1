@@ -6,25 +6,40 @@
         <h5>Highest Likes on a Single Post</h5>
         <div  id="OHV">
             <div class="py-1">
-
-                Globally  Highest Scorer till now is  {{ranker.0.username}}
+                <a href="upload/{{ranker.0.username}}">
+                    Globally  Highest Scorer till now is  {{ranker.0.username}}
+                </a>
             </div>
             <div class="py-1">
-
+                <a href="upload/{{ranker.2.username}}">
                 In College Highest Scorer till this day is {{ranker.2.username}}
+                </a>
             </div>
         </div>
-
         <div>
             <h5>Last Week's Top Scorer</h5>
-
-            <div class="py-1">
-                Globally  Highest Scorer last week is {{ranker.1.username}}
+            {{# if ranker.1.username}}
+                <div class="py-1">
+                    <a href="upload/{{ranker.1.username}}">
+                         Globally  Highest Scorer last week is {{ranker.1.username}}
+                    </a>
             </div >
-            <div class="py-1">
-
-                In College Highest Scorer last week is  {{ranker.3.username}}
-            </div>
+            {{else}}
+                <div class="py-1 alert-danger">
+                    Oops sorry no new update
+                </div>
+            {{/if}}
+            {{# if ranker.3.username}}
+                <div class="py-1">
+                    <a href="upload/{{ranker.3.username}}">
+                    In College Highest Scorer last week is  {{ranker.3.username}}
+                    </a>
+                </div>
+            {{else}}
+                <div class="py-1 alert-danger">
+                Oops sorry no new update
+                </div>
+            {{/if}}
 
         </div>
     </div>

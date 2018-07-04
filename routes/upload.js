@@ -1,6 +1,6 @@
 const route=require('express').Router()
 const ctrl=require('../controllers/posts')
-const chk=require("../controllers/achievements")
+const ctrlRanker=require("../controllers/ranker")
 const path=require('path')
 const multer=require('multer')
 const ctrlComment=require('../controllers/comment')
@@ -84,6 +84,18 @@ route.post('/',(req,res)=>{
             }
         })
     }
+})
+route.get('/:username',(req,res)=>{
+    ctrl.postByUsername(req.params)
+        .then((data)=>{
+            ctrlRanker.getRanker(req.user)
+                .then((ranker)=>{
+                    let nav=req.user
+                    res.render('post',{posts:data,nav,ranker,otherUsername:req.params.username})
+                })
+            console.log(data)
+            res.render('post',{nav,posts:data,})
+        })
 })
 route.get('/mydata',(req,res)=>{
     console.log("my data")

@@ -177,5 +177,16 @@ exports=module.exports={
                 id:reqQuery.postId
             }
         })
+    },
+    postByUsername:(reQuery)=>{
+        return Post.findAll({
+        include:[{
+            model:User,
+            attributes:['username'],
+            where:{
+                username:reQuery.username
+            }
+        }]
+        })
     }
 }

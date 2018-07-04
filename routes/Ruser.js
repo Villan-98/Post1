@@ -128,14 +128,13 @@ route.delete('/Mypost',(req,res)=>{
         })
 })
 route.get('/profile',(req,res)=>{
-    if(!req.user)
+    if(!req.isAuthenticated())
     {
         res.redirect('/auth/signin')
     }
     else{
-        console.log("in the user")
-                let nav=req.user
-                res.render('profile',{r:req,nav})
+        let nav=req.user
+        res.render('profile',{r:req,nav})
     }
 })
 route.get('/achievement',(req,res)=>{

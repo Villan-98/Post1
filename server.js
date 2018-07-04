@@ -46,9 +46,13 @@ app.get('/logout',(req,res)=>{
     })
 })
 app.get('/',(req,res)=>{
-
-  res.render('home')
-
+    if(req.isAuthenticated())
+    {
+        res.redirect('/'+req.user.username)
+    }
+    else{
+        res.render('home')
+    }
 })
 app.use('/',express.static(path.join(__dirname,'public')))
 app.use('/auth',require('./routes/Rauth'))

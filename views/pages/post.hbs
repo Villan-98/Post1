@@ -1,18 +1,25 @@
-
-<div class="container-fluid">
+<div class="container-fluid" xmlns="http://www.w3.org/1999/html">
     <div class="row">
-        {{>collegues}}
+        {{#if otherUsername}}
+            <div class="col-2 bg-light text-center">
+                <h4>Badges </h4>
+            </div>
+        {{else}}
+            {{>collegues}}
+        {{/if}}
         <div class="col" style="float:left;overflow-y: auto;height: 780px;">
             <h2 class="text-center" style="font-family: Century">
-                Your Posts
+                {{#if otherUsername}}
+                    {{otherUsername}}'s Uploads
+                {{else}}
+                    Your Uploads
+                {{/if}}
             </h2>
 
             <div id="posts">
                 {{>searched_post}}
             </div>
         </div>
-
             {{>ranker}}
-
     </div>
 </div>
