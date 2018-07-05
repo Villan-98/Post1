@@ -8,9 +8,6 @@ const ctrl_achv=require('../controllers/achievements')
 const college=require('./college')
 
 var requery     ={}           //to store the date stored in json file
-let jsonData = JSON.parse(fs.readFileSync('./dateStore.json', 'utf-8'))
-requery['lastUpdation']=jsonData.lastUpdation
-requery['nextUpdation']=jsonData.nextUpdation
 
 /**********In this file
  * BH is for highest vote for a batch in a particular college
@@ -20,7 +17,17 @@ requery['nextUpdation']=jsonData.nextUpdation
  * *********/
 
 
-
+let writeDate=function(){
+    var currentDate=store.date('today')
+    var updateDate=store.date('1 hour from now ')               //set time accordingly
+    data['lastUpdation']=currentDate
+    data['nextUpdation']=updateDate
+    fs.writeFile('dateStore.json', JSON.stringify(data), function (err) {
+        if (err) throw err;
+        //console.log('Date Saved!');
+    })
+}
+//writeDate()         //it should be called when there is no date written in datestore.json otherwise no updation occur
 let insertGHT=function()
 {
     ranker.findOrCreate({where:{
@@ -30,6 +37,7 @@ let insertGHT=function()
             role:'H.V.P'
         }
     })
+    insertGHW()
 }
 let insertBHT=function()
 {
@@ -63,6 +71,7 @@ let insertGHW=function()
             role:'H.V.P'
         }
     })
+    insertCHT()
 }
 
 let insertCHT=function()
@@ -80,6 +89,7 @@ let insertCHT=function()
                 })
             }
         })
+    insertCHW()
 }
 let insertCHW=function()
 {
@@ -137,6 +147,8 @@ let updateGH=function(){
                 })
             }
         })
+
+    updateGHW()
 }
 let updateGHW=function(){
     ctrl_achv.GHW(requery)             // you have to pass two dates in this function in an object which
@@ -155,7 +167,7 @@ let updateGHW=function(){
                 })
             }
         })
-
+    updateCH()
 }
 let updateBH=function(){
     college.getAllCollege()
@@ -230,7 +242,7 @@ let updateCH=function(){
 
             }
         })
-
+    updateCHW()
 }
 let updateCHW=function(){
     college.getAllCollege()
@@ -257,35 +269,44 @@ let updateCHW=function(){
                     })
             }
         })
+        writeDate()         //to write date in datestore.json
+
 }
-var currentDate=store.date('today')
-var updateDate=store.date('1 week from now ')
-console.log(updateDate)
-console.log(currentDate)
-data['lastUpdation']=currentDate
-data['nextUpdation']=updateDate
-// below fu
-// nction are called when if force is true in db sync i.e when data is empty
+let upInsertion=function(){
+    console.log("upInsertion")
+    let jsonData = JSON.parse(fs.readFileSync('./dateStore.json', 'utf-8'))
+    requery['lastUpdation']=jsonData.lastUpdation
+    requery['nextUpdation']=jsonData.nextUpdation
+    if(Date.parse(requery.nextUpdation)<=Date.now())
+    {
+       console.log( Date.parse(requery.nextUpdation))
+        console.log("done")
+        console.log(Date.now())
+        try{
+           /***here many updation and insertion function
+            * are linked one after other i.e.,
+            * all insertion function will be called
+            * on execution of insertGHT() and same for case  of updation****/
+
+            //insertGHT()      //commented so that less no. of query run in terminal(there are just findOr create query)
+            updateGH()
+        }catch(err){
+            writeDate()
+        }
+    }
+    else{
+
+    }
+}
 //insertGHT()
-//insertGHW()
+//
 //insertCHT()
 /*insertBHT()
 insertBHW()*/
 //insertCHW()
 
-//////////////////////////////////////////////////////
-//for regular updation of rankers at a regular interval either weekly or daily
-updateGH()
-updateCHW()
-updateGHW()
-updateCH()
-//updateBH()                       //an issue is there
-                                    //wrong sql query is running//
+setInterval(upInsertion,660000)             //set time according to the timing you want updation
 
-fs.writeFile('dateStore.json', JSON.stringify(data), function (err) {
-    if (err) throw err;
-    //console.log('Date Saved!');
-})
 /////fetching the data of rankers//////////////////////////
 module.exports={
     getRanker:async(requery)=>{

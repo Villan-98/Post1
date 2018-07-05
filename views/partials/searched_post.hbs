@@ -25,14 +25,14 @@
 
                                 {{#if post.dislikes.0.value}}
                                     <div class="col-3"  id="N{{post.id}}">
-                                        <i class="far fa-thumbs-up" onclick="like_post({{post.id}},2,{{post.vote}},1),abv()" style="font-size: 36px" aria-hidden="true"></i>
-                                        <i class="fa fa-thumbs-down"onclick="like_post({{post.id}},1,{{post.vote}},0),abv()" style="font-size:36px"aria-hidden="true"></i>
+                                        <i class="far fa-thumbs-up" onclick="like_post({{post.id}},2,{{post.vote}},1),abv()" style="font-size: 30px" aria-hidden="true"></i>
+                                        <i class="fa fa-thumbs-down"onclick="like_post({{post.id}},1,{{post.vote}},0),abv()" style="font-size:30px"aria-hidden="true"></i>
                                     </div>
                                 {{else}}
                                     <div class="col-3" id="N{{post.id}}">
 
-                                        <i class="far fa-thumbs-up" onclick="like_post({{post.id}},1,{{post.vote}},1),abv()" style="font-size: 36px" aria-hidden="true"></i>
-                                        <i class="far fa-thumbs-down"onclick="like_post({{post.id}},-1,{{post.vote}},1),abv()" style="font-size:36px"aria-hidden="true"></i>
+                                        <i class="far fa-thumbs-up" onclick="like_post({{post.id}},1,{{post.vote}},1),abv()" style="font-size: 30px" aria-hidden="true"></i>
+                                        <i class="far fa-thumbs-down"onclick="like_post({{post.id}},-1,{{post.vote}},1),abv()" style="font-size:30px"aria-hidden="true"></i>
                                     </div>
                                 {{/if}}
                             {{/if}}

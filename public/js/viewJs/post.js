@@ -70,8 +70,8 @@ $(function(){
             let Id='N'+body.postId
             $('#'+Id).empty()
             $('#'+Id).append(
-                $(` <i class="fa fa-thumbs-up" onclick="like_post(${body.postId},-1,${body.vote},0)" style="font-size: 36px" aria-hidden="true"></i></div>
-                    <i class="far fa-thumbs-down" onclick="like_post(${body.postId},-2,${body.vote},1)" style="font-size: 36px" aria-hidden="true"></i></div>`)
+                $(` <i class="fa fa-thumbs-up" onclick="like_post(${body.postId},-1,${body.vote},0)" style="font-size: 30px" aria-hidden="true"></i></div>
+                    <i class="far fa-thumbs-down" onclick="like_post(${body.postId},-2,${body.vote},1)" style="font-size: 30px" aria-hidden="true"></i></div>`)
             )
 
         }
@@ -81,8 +81,8 @@ $(function(){
             let Id='N'+body.postId
             $('#'+Id).empty()
             $('#'+Id).append(
-                $(`<i class="far fa-thumbs-up" onclick="like_post(${body.postId},2,${body.vote},1)" style="font-size: 36px" aria-hidden="true"></i></div>
-                     <i class="fa fa-thumbs-down" onclick="like_post(${body.postId},1,${body.vote},0)" style="font-size: 36px" aria-hidden="true"></i></div>`)
+                $(`<i class="far fa-thumbs-up" onclick="like_post(${body.postId},2,${body.vote},1)" style="font-size: 30px" aria-hidden="true"></i></div>
+                     <i class="fa fa-thumbs-down" onclick="like_post(${body.postId},1,${body.vote},0)" style="font-size: 30px" aria-hidden="true"></i></div>`)
             )
 
         }
@@ -93,8 +93,8 @@ $(function(){
             $('#'+Id).empty()
             $('#'+Id).append(
                 $(` 
-                    <i class="far fa-thumbs-up" onclick="like_post(${body.postId},1,${body.vote},1)" style="font-size: 36px" aria-hidden="true"></i>
-                     <i class="far fa-thumbs-down"onclick="like_post(${body.id},-1,${body.vote},1)" style="font-size:36px"aria-hidden="true"></i>
+                    <i class="far fa-thumbs-up" onclick="like_post(${body.postId},1,${body.vote},1)" style="font-size: 30px" aria-hidden="true"></i>
+                     <i class="far fa-thumbs-down"onclick="like_post(${body.id},-1,${body.vote},1)" style="font-size:30px"aria-hidden="true"></i>
                   `)
             )
         }
