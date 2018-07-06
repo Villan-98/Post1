@@ -1,12 +1,14 @@
 
     <div class="col">
         <div>
-            <h2 class="bg-light py-3">Achievement</h2>
+            <h2 class="bg-light py-3 text-center">Achievement</h2>
         </div>
-        <div class="jumbotron pt-4">
             {{#if data}}
-                <div class="row">
-                    <div class="col">
+
+            <div class="my-4 py-4 bg-light mx-1" style="border-radius:10px">
+                    <h3 class="text-center py-3 mx-0 text-white bg-dark">Your Highest Voted Upload</h3>
+                <div class="row px-4">
+                    <div class="col-2">
                         Post :
                     </div>
                     {{#if data.pic}}
@@ -20,30 +22,108 @@
                         </div>
                     {{/if}}
                 </div>
-                <div class="row">
-                    <div class="col">
+                <div class="row px-4">
+                    <div class="col-2">
                         Votes on Post :
                     </div>
                     <div class="col">
                         {{data.vote}}
                     </div>
-                </div><div class="row">
-                <div class="col">
+                </div>
+                <div class="row px-4">
+                <div class="col-2">
                     Post Created on:
                 </div>
                 <div class="col">
                     {{data.createdAt}}
                 </div>
             </div>
-            {{else}}
+            </div>
 
-                <div class="row">
-                    <div class="col alert-danger">
-                        Sorry , you have not send any post
+
+                     <div class=" my-4 py-4 bg-light mx-1" style="border-radius:10px">
+
+                         <h3 class="text-center py-3 mx-0 text-white bg-dark">Globally Highest Voted Upload</h3>
+                         <div class="row">
+                             <div class="col ">
+                                 <img src="/assets/trophy(2).jpg">
+                             </div>
+                             {{# if badge.Trophy}}
+                                 <div class="col">
+                                      No. of Trophy achieved: {{badge.Trophy}}
+                                 </div>
+                             {{else}}
+
+                                 <div class="alert-danger">
+                                     Sorry No Medal Achieved In This Field
+                                 </div>
+                             {{/if}}
+                         </div>
+                       </div>
+                <div class=" my-4 py-4 bg-light mx-1" style="border-radius:10px">
+
+                    <h3 class="text-center py-3 mx-0 text-white bg-dark">Highest Voted Upload In College</h3>
+                    <div class="row m-4">
+                        <div class="col ">
+                            <img src="/assets/gold.jpg">
+                        </div>
+                        {{# if badge.Gold}}
+                            <div class="col">
+                                No. of Gold Medal achieved: {{badge.Gold}}
+                            </div>
+                        {{else}}
+                            <div class="col">
+                                <span class="alert-danger p-3">Sorry No Medal Achieved In This Field</span>
+                            </div>
+                        {{/if}}
+                    </div>
+                </div>
+                <div class=" my-4 py-4 bg-light mx-1" style="border-radius:10px">
+
+                <h3 class="text-center py-3 mx-0 text-white bg-dark">Globally Highest Voted Upload In a Particular Week</h3>
+                <div class="row m-4">
+                    <div class="col ">
+                        <img src="/assets/silver.jpg">
+                    </div>
+                    {{# if badge.Silver}}
+                        <div class="col">
+                            No. of Silver Achieved: {{badge.Silver}}
+                        </div>
+                    {{else}}
+                        <div class="col">
+                           <span class="p-3 alert-danger">Sorry No Medal Achieved In This Field</span>
+                        </div>
+                    {{/if}}
+                </div>
+            </div><div class=" my-4 py-4 bg-light mx-1" style="border-radius:10px">
+
+                <h3 class="text-center py-3 mx-0 text-white bg-dark">Highest Voted Upload In College for A Particular Week</h3>
+                <div class="row m-4">
+                    <div class="col ">
+                        <img src="/assets/bronze.jpg">
+                    </div>
+                    {{# if badge.Bronze}}
+                        <div class="col">
+                            No. of Silver Achieved: {{badge.Bronze}}
+                        </div>
+                    {{else}}
+                        <div class="col ">
+                           <span class="alert-danger p-3 ">Sorry No Medal Achieved In This Field</span>
+                        </div>
+                    {{/if}}
+                </div>
+            </div>
+
+            {{else}}
+                <div class="jumbotron py-4">
+
+                    <div class="row">
+                        <div class="col alert-danger">
+                            Sorry , you have not send any post
+                        </div>
                     </div>
                 </div>
             {{/if}}
-        </div>
     </div>
 
 

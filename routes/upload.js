@@ -1,6 +1,8 @@
 const route=require('express').Router()
 const ctrl=require('../controllers/posts')
 const ctrlRanker=require("../controllers/ranker")
+const ctrlAchv=require('../controllers/achievements')
+const ctrlUser=require('../controllers/user')
 const path=require('path')
 const multer=require('multer')
 const ctrlComment=require('../controllers/comment')
@@ -85,18 +87,48 @@ route.post('/',(req,res)=>{
         })
     }
 })
-route.get('/:username',(req,res)=>{
-    ctrl.postByUsername(req.params)
-        .then((data)=>{
-            ctrlRanker.getRanker(req.user)
-                .then((ranker)=>{
-                    let nav=req.user
-                    res.render('post',{posts:data,nav,ranker,otherUsername:req.params.username})
+route.get('/:userName',(req,res)=>{
+    ctrlUser.checkUser(req.params)
+        .then((user)=>{
+            console.log("user is")
+            console.log(user)
+            ctrl.getpost(user)
+                .then((data)=>{
+                    ctrlRanker.getRanker(req.user)
+                        .then((ranker)=>{
+                            ctrlAchv.getBadge(user)
+                                .then((result)=>{
+                                    let badge={}
+                                    badge['Trophy']=0
+                                    badge['Gold']=0
+                                    badge['Silver']=0
+                                    badge['Bronze']=0
+                                    result.forEach((medal)=>{
+                                        if(medal.badgeType==='Trophy')
+                                        {
+                                            badge.Trophy++
+                                        }
+                                        else if(medal.badgeType==='Gold')
+                                        {
+                                            badge.Gold++
+                                        }
+                                        else if(medal.badgeType==='Silver')
+                                        {
+                                            badge.Silver++
+                                        }
+                                        else if(medal.badgeType==='Bronze')
+                                        {
+                                            badge.Bronze++
+                                        }
+                                    })
+                                    let nav=req.user
+                                    res.render('post',{posts:data,nav,ranker,otherUsername:req.params.userName,badge})
+                                })
+                        })
                 })
-            console.log(data)
-            res.render('post',{nav,posts:data,})
+
         })
-})
+    })
 route.get('/mydata',(req,res)=>{
     console.log("my data")
     ctrl.getpost(req.query)

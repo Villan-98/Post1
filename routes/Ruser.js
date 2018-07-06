@@ -134,7 +134,18 @@ route.get('/profile',(req,res)=>{
     }
     else{
         let nav=req.user
-        res.render('profile',{r:req,nav})
+        ctrl_achieve.get_tot_post(req.user)
+            .then((data)=>{
+                req.user['totalPost']=data
+                ctrl_achieve.countBadge(req.user)
+                    .then((data)=>{
+                        req.user['badgeCount']=data
+                    })
+                res.render('profile',{r:req,nav})
+            })
+            .catch((err)=>{
+                res.status(404).json({err:err})
+            })
     }
 })
 route.get('/achievement',(req,res)=>{
@@ -144,8 +155,34 @@ route.get('/achievement',(req,res)=>{
     else{
         ctrl_achieve.getHVPost(req.user)
             .then((data)=>{
-                let nav=req.user
-                res.render('achievement',{data,nav})
+                ctrl_achieve.getBadge(req.user)
+                    .then((result)=>{
+                        let nav=req.user
+                        let badge={}
+                        badge['Trophy']=0
+                        badge['Gold']=0
+                        badge['Silver']=0
+                        badge['Bronze']=0
+                        result.forEach((medal)=>{
+                            if(medal.badgeType==='Trophy')
+                            {
+                                badge.Trophy++
+                            }
+                            else if(medal.badgeType==='Gold')
+                            {
+                                badge.Gold++
+                            }
+                            else if(medal.badgeType==='Silver')
+                            {
+                                badge.Silver++
+                            }
+                            else if(medal.badgeType==='Bronze')
+                            {
+                                badge.Bronze++
+                            }
+                        })
+                        res.render('achievement',{data,badge,nav})
+                    })
 
             }
         )

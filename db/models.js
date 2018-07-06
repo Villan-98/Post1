@@ -35,6 +35,11 @@ const Ranker=db.define('ranker',{
         type:DataTypes.INTEGER,
     }
 })
+const Badge=db.define('badge',{
+    badgeType:{
+        type:DataTypes.STRING,
+    }
+})
 const User=db.define('Puser',{
     name:{
         type:DataTypes.STRING,
@@ -66,6 +71,8 @@ const User=db.define('Puser',{
         type:DataTypes.STRING
     }
 })
+
+Badge.belongsTo(User)
 const Post=db.define('post',{
     text:{
         type:DataTypes.STRING,
@@ -93,7 +100,7 @@ const Post=db.define('post',{
 
 })
 Post.belongsTo(User)
-
+Badge.belongsTo(Post)
 const Like=db.define('likes',{
 
     value:{
@@ -185,6 +192,6 @@ db.sync({
 })
     .then(()=>{console.log("database syncronised")})
 exports=module.exports={
-    db,User,Post,Like,Dislike,Comment,url,Ranker,College
+    db,User,Post,Like,Dislike,Comment,url,Ranker,College,Badge
 
 }

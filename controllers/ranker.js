@@ -3,6 +3,7 @@ let data = {}
 const dateStore=require('date-store')
 const store=new dateStore()
 const ranker=require('../db/models').Ranker
+const ctrlBadge=require('../controllers/badge')
 const post=require('../db/models')
 const ctrl_achv=require('../controllers/achievements')
 const college=require('./college')
@@ -137,6 +138,8 @@ let updateGH=function(){
             {
                 //console.log("data is")
                 //console.log(data)
+                data['badgeType']='Trophy'
+                ctrlBadge.insertMedal(data)
                 ranker.update({                             //updating GHT
                     username:data.Puser.username
                 },{
@@ -157,6 +160,9 @@ let updateGHW=function(){
             //updating GHW
             if(data)
             {
+
+                data['badgeType']='Silver'
+                ctrlBadge.insertMedal(data)
                 ranker.update({
                     username:data.Puser.username
                 },{
@@ -182,7 +188,6 @@ let updateBH=function(){
                         .then((data)=>{
                             if(data)
                             {
-
                                 ranker.update({
                                     username:data.Puser.username
                                 },{
@@ -227,6 +232,8 @@ let updateCH=function(){
                     .then((data)=>{
                         if(data)
                         {
+                            data['badgeType']='Gold'
+                            ctrlBadge.insertMedal(data)
                             ranker.update({
                                 username:data.Puser.username
                             },{
@@ -256,6 +263,8 @@ let updateCHW=function(){
                                             //why this function was not working properly in updateCH function
                         if(data)
                         {
+                            data['badgeType']='Bronze'
+                            ctrlBadge.insertMedal(data)
                             ranker.update({
                                 username:data.Puser.username
                             },{
@@ -304,9 +313,9 @@ let upInsertion=function(){
 /*insertBHT()
 insertBHW()*/
 //insertCHW()
-
-setInterval(upInsertion,660000)             //set time according to the timing you want updation
-
+console.log("*******************setInterval next****************")
+//setInterval(upInsertion,660000)             //set time according to the timing you want updation
+updateGH()
 /////fetching the data of rankers//////////////////////////
 module.exports={
     getRanker:async(requery)=>{

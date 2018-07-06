@@ -2,6 +2,7 @@ const Posts=require('../db/models').Post
 const Comment=require('../db/models').Comment
 const User=require('../db/models').User
 const sequelize=require('sequelize')
+const ctrlBadge=require('../db/models').Badge
 const Op=sequelize.Op
 exports=module.exports={
     getHVPost:async(reqQuery)=>{
@@ -20,7 +21,7 @@ exports=module.exports={
     get_tot_post:async(reqQuery)=>{
         return Posts.count({
             where:{
-                userId:1
+                PuserId:reqQuery.id
             }
         })
     },
@@ -146,5 +147,39 @@ exports=module.exports={
 
         }]
     })
-}
+    },
+    insertBadge:async(requery)=>{
+        return ctrlBadge.findOrCreate({
+            where:{
+                postId:requery.id,
+                PuserId:requery.PuserId
+            }
+        })
+    },
+    updateBadge:async(requery)=>{
+        return ctrlBadge.update({
+            badgeType:requery.badgeType
+        },{
+            where:{
+                postId:requery.id
+            }
+
+        })
+    },
+    getBadge:(requery)=>{
+        return ctrlBadge.findAll({
+            where:{
+                PuserId:requery.id
+            }
+        })
+
+    },
+    countBadge:(reQuery)=>{
+        return ctrlBadge.count({
+            where:{
+                PuserId:reQuery.id
+            }
+        })
+    },
+
 }
