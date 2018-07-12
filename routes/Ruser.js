@@ -51,37 +51,6 @@ route.get('/',(req,res)=>{                             //active post button is r
                         let nav=req.user
                         res.render('abc',{nav,ranker,posts})
                     })
-                /*
-                ctrl_achieve.GlHScorer(req.user)
-                    .then((data)=>{
-                       // console.log("data zero is"+data)        //why is printing object object in console
-                        let ranker={}
-                        if(data)
-                        {
-                            ranker['global']=data.Puser
-                        }
-                        ctrl_achieve.ClGScorer(req.user)
-                            .then((data)=>{
-                                if(data)
-                                {
-                                    ranker['college']=data.Puser
-                                }
-                                ctrl_achieve.ClBScorer(req.user)
-                                    .then((data)=>{
-                                        if(data)
-                                        {
-                                            ranker['clBatch']=data.Puser
-                                        }
-                                        let date=(store.date('3 week ago'))
-                                        console.log(date.toLocaleDateString())
-                                        let nav=req.user
-                                        //console.log(posts.Puser)
-                                        // res.send(posts)
-                                        res.render('abc',{posts,nav,ranker})
-                                    })
-                            })
-
-                    })*/
             })
             .catch((err)=>{
                 res.status(200).json({message:"cannot fetch all post"})
@@ -89,15 +58,18 @@ route.get('/',(req,res)=>{                             //active post button is r
 
 
 
-    }/*
-    if(req.user.college===''||(!req.user.username))
-    {
-        res.redirect('/user/profile')
-    }*/
+    }
 
 })
 route.get('/chat/:id',(req,res)=>{
-    res.render('chat')
+    if(req.isAuthenticated())
+    {
+        let nav=req.user
+        res.render('chat',{nav})
+    }
+    else{
+        res.redirect('/auth/sigin')
+    }
 })
 route.get('/MyPost',ActivePostButton,(req,res)=>{
     if(!req.user){

@@ -5,7 +5,6 @@ const ctrlAchv=require('../controllers/achievements')
 const ctrlUser=require('../controllers/user')
 const path=require('path')
 const multer=require('multer')
-const ctrlComment=require('../controllers/comment')
 const storage=multer.diskStorage({
     destination:'public/upload',
     filename:function(req,file,cb){
@@ -192,44 +191,5 @@ route.patch('/',(req,res)=>{
 
         /**/
 
-})
-route.post('/comment',(req,res)=>{
-    console.log("reaching in the comment ")
-    console.log("userid"+req.user.id)
-    console.log("userid"+req.body.Ctext)
-    //req.body['userId']=req.user.dataValues.id
-    req.body['userId']=req.user.id
-
-    ctrlComment.addComment(req.body)
-        .then(()=>{
-            console.log("ldskjfkjalsdfjlkasfjlskdjfks"+req.user.dataValues.id)
-            req['query']={
-
-                postId:req.body.postId,
-
-            }
-            ctrlComment.getComment(req.query)
-                .then((data)=>{
-                   res.send(data)
-                }).catch((err)=>{
-                console.log(err)
-            })
-            console.log("comment added"+req.query.postId)
-        })
-        .catch((err)=>{
-            console.log(err)
-        })
-
-})
-route.get('/comment',(req,res)=>{
-    console.log(req.params)
-    console.log("reaching in the comment "+req.query.postId)
-
-    ctrlComment.getComment(req.query)
-        .then((data)=>{
-            res.send(data)
-        }).catch((err)=>{
-            console.log(err)
-    })
 })
 exports=module.exports=route
