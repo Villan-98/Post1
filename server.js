@@ -7,7 +7,7 @@ const sessionStore=require('express-session-sequelize')(session.Store)
 const database=require('./db/models').db
 const http = require('http')
 const socketio = require('socket.io')
-
+const ctrlChat=require('./controllers/chat')
 
 const app = express()
 
@@ -61,39 +61,29 @@ app.use('/leader',require('./routes/achievement'))
 app.use('/upload',require('./routes/upload'))
 app.use('/like',require('./routes/like'))
 app.use('/test',require('./routes/test'))
-app.use('/chat',require('./routes/chatroom'))
 
 io.on('connection',function(socket){
-    console.log("socket id is "+socket.id)
-    socket.on('login',(data)=>{
+    socket.broadcast.emit('user connected')
+    socket.on('joinRoom',(data)=>{
+        console.log(data)
         socketIdName[socket.id]=data.username
-        socket.join(data.username)
+        socket.join(data.room)
+        ctrlChat.getMessage(data)
+            .then((messages)=>{
+                socket.emit('joined',messages)
+            })
+       /* socket.join(data.username)
         console.log(data.username)
-        socket.emit('logged_in',{
-            username:data.username,
-            success:true
-        })
+        console.log(socketIdName)*/
+
     })
-    socket.on('chat',(data)=>{
-        if(socketIdName[socket.id])
-        {
-            if(data.message.charAt(0)==='@'){
-                let receptient=data.message.split[0].substring(1)
-                io.to(receptient).emit('chat',{
-                    private:true,
-                    sender:socketIdName[socket.id],
-                    message:data.message,
-                    timestamp:new Date()
-                })
-            }
-            else{
-                socket.setBroadcast.emit('chat',{
-                    sender:socketIdName[socket.id],
-                    message:data.message,
-                    timestamp:new Date()
-                })
-            }
-        }
+    socket.on('discuss',(data)=>{
+        io.sockets.in(data.room).emit('message',{
+            message:data.message,
+            sender:socketIdName[socket.id]
+        })
+        data['sender']=socketIdName[socket.id]
+        ctrlChat.insertMessage(data)
     })
 })
 server.listen(8888,()=>{

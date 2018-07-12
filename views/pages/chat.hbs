@@ -1,99 +1,10 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
 
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <script src="/js/jquery-3.2.1.js"></script>
-
-    <script src="/socket.io/socket.io.js"></script>
-    <script src="../js/chat.js"></script>
-    <title>Title</title>
-</head>
-<body>
-    <div class="container-fluid">
+    <div class="container">
         <div class="row">
-            <div class="col-2 bg-light ">
-                <div class="row">
-
-                    <div class="col" >
-
-                        <div  class="text-center nav flex-column nav-pills">
-                            <div>
-                                <a class="nav-link " href="http://localhost:2400/user/home" style="font-size:15px">Home</a>
-
-                            </div>
-                            <div>
-
-                                <a class="nav-link"href="http://localhost:2400/user/Mypost"style="font-size:15px">My Post</a>
-                            </div>
-                            <div>
-
-                                <a class="nav-link"href="http://localhost:2400/user/achievement" style="font-size:15px">Achievement</a>
-                            </div>
-                            <div>
-
-                                <a class="nav-link" href="http://localhost:2400/user/Mypost" style="font-size:15px">Notifications</a>
-                            </div>
-                            <div class="nav-item">
-
-                                <a class="nav-link"href="http://localhost:2400/user/profile"style="font-size:15px">Edit Profie</a>
-                            </div>
-                            <div class="nav-item">
-                                <a href="/logout" class="nav-link ">
-                                    Logout
-                                </a>
-                            </div>
-                            <div class="nav-item">
-
-                                <a  class="nav-link"href="http://localhost:2400/chat"style="font-size:15px">Chat Room</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-8 px-0">
-                <div class="col bg-dark text-center py-1 text-light font-weight-bold ">
-                  <h2>Chat Room</h2>
-                </div>
-                <div>
-                    <button id="start_chat">
-                        start chat
-                    </button>
-                </div>
-            </div>
-             <!--<h1 class="text-center">Socket Example</h1>
-                <div class="container" id="login">
-                    <div class="row">
-                        <input class="form-control col m-4" type="text" id="inp-username">
-                        <button class="btn btn-success col m-4" id="btn-login">Login</button>
-                    </div>
-                </div>
-                <div class="container" id="chatbox">
-                    <div class="row">
-                        <input class="form-control col m-4" type="text" id="inp-msg">
-                        <button class="btn btn-info col m-4" id="btn-send">SEND</button>
-                    </div>
-
-                    <div class="row p-4 m-4" id="chatlist">
-
-                    </div>
-                </div>
-            </div>-->
-            <div class="col-2 bg-light px-0">
-                <h3 class="bg-primary text-light text-center px-0  py-2 mx-0">Collegues</h3>
-                    {{#each data as |person|}}
-                        <div class="bg-white py-1 my-1 mx-1">
-                            <a class="px-2" href="#">
-                                {{person.name}}
-                            </a>
-                        </div>
-                        {{/each}}
-            </div>
-
+            <input class="form-control col m-4" type="text" id="inp_msg">
+            <button class="btn btn-info col m-4" id="send_btn">SEND</button>
         </div>
+            <div class="row p-4 m-4" id="chatlist">
+
+            </div>
     </div>
-</body>
-</html>

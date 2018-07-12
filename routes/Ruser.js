@@ -96,6 +96,9 @@ route.get('/',(req,res)=>{                             //active post button is r
     }*/
 
 })
+route.get('/chat/:id',(req,res)=>{
+    res.render('chat')
+})
 route.get('/MyPost',ActivePostButton,(req,res)=>{
     if(!req.user){
         res.redirect('/auth/signin')

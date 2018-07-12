@@ -1,45 +1,64 @@
-let socket=io.connect('http://localhost:2400/')
+let socket=io.connect()
 $(function() {
-    console.log("connected")
     let container_login = $('#login')
     let chat_container = $('#chatbox')
     chat_container.hide()
-
     let start_chat = $('#start_chat')
     let inp_username=$('#inp_username')
     let btn_send = $('#send_btn')
     let inp_msg=$('#inp_msg')
     let listchats=$('#chatlist')
+    let join=$('.joinChat')
 
-    start_chat.click(()=>{
-      socket.emit('login',{
-          username:"sachin"
+    const path=window.location.pathname
+    const  splitPath=path.split('/')
+    console.log(splitPath)
+    console.log(path)
+
+    socket.emit('joinRoom',{
+          username:splitPath[1],
+            room:splitPath[3]
+        })
+    socket.on('joined',(data)=>{
+        data.forEach((ele)=>{
+
+            listchats.append(
+                $(      `
+            <div class="card ${listchats} col-12">
+                <div class="card-body">
+                    <div class="card-title">sender:${ele.sender}</div>
+                    <div class="card-text">${ele.message}</div>
+                </div>
+            </div>
+                `)
+            )
         })
     })
-    socket.on('logged_in',(data)=>{
-        if(data.success){
-            chat_container.show()
-            container_login.hide()
-            console.log("stored")
-        }
-    })
-    btn_send.click(()=>{
-        socket.emit('chat',{
-            message:inp_msg.val()
-        })
-    })
-    socket.on('chat',(data)=>{
+    socket.on('message',(data)=>{
+        console.log(data)
         listchats.append(
             $(      `
-            <div class="card ${cardExtraClass} col-12">
+            <div class="card ${listchats} col-12">
                 <div class="card-body">
-                    <div class="card-title">${data.sender}</div>
-                    <div class="card-subtitle text-muted small">${data.timestamp}</div>
+                    <div class="card-title">sender:${data.sender}</div>
                     <div class="card-text">${data.message}</div>
                 </div>
             </div>
                 `)
-    )
+        )
+    })
+    btn_send.click(()=>{
+        console.log("send button clicked")
+        socket.emit('discuss',{
+            message:inp_msg.val(),
+            room:splitPath[3]
+
+        })
+    })
+    socket.on('chat',(data)=>{
+        console.log("in teh on chat")
+        console.log(data)
+
     })
 
 })

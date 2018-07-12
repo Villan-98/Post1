@@ -2,17 +2,24 @@
     <div class="col">
         {{# each posts as |post|}}
             <div class="row bg-light m-2 px-3">
-                <div class="col-12">
-                   Uploaded by: {{post.Puser.username}}
-                </div>
-                <div class="col-12">
-                    {{post.text}}
-                </div>
-                {{#if post.pic}}
 
-                        <img src="/upload/{{post.address}}" style='height: 100%; width: 100%; object-fit: contain'>
-                {{/if}}
-                <div class="col-12 mt-4" id="{{post.id}}">
+                <div class="col-12" >
+                    <a href="/{{../nav.username}}/chat/{{post.id}}">
+                        <div class="col-12">
+                            Uploaded by: {{post.Puser.username}}
+                        </div>
+
+                        <div class="col-12">
+                            {{post.text}}
+                        </div>
+                        {{#if post.pic}}
+
+                            <img src="/upload/{{post.address}}" style='height: 100%; width: 100%; object-fit: contain'>
+                        {{/if}}
+                        <hr>
+                    </a>
+                </div>
+                <div class="col-12 mt-1" id="{{post.id}}">
 
                         <div class="row">
                             {{#if post.likes.0.value}}

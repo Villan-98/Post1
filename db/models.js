@@ -123,6 +123,27 @@ Like.belongsTo(User,{foreignKey:{
 
     }
 })
+const socketDiscuss=db.define('socketDiscuss',{
+    message:{
+        allowNull:false,
+        type:DataTypes.STRING
+    },
+    sender:{
+        allowNull:false,
+        type:DataTypes.STRING
+    }
+})
+Post.hasMany(socketDiscuss)
+const socketId=db.define('socketId,',{
+    socket:{
+        type:DataTypes.STRING,
+        allowNull:false
+    },
+    userName:{
+        type:DataTypes.STRING,
+        allowNull:false
+    }
+})
 
 Post.hasMany(Like,{foreignKey:{
         name:'Post_key',
@@ -192,6 +213,6 @@ db.sync({
 })
     .then(()=>{console.log("database syncronised")})
 exports=module.exports={
-    db,User,Post,Like,Dislike,Comment,url,Ranker,College,Badge
+    db,User,Post,Like,Dislike,Comment,url,Ranker,College,Badge,socketId,socketDiscuss
 
 }

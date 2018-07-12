@@ -9,9 +9,9 @@
     <script src="/js/jquery-3.2.1.js"></script>
     <script src="/js/viewJs/post.js"></script>
     <script src="/js/viewJs/achievement.js"></script>
-    <script src="/js/viewJs/comment.js"></script>
-    <!--<script src="/socket.io/socket.io.js"></script>
-    <script src="/js/viewJs/chat.js"></script>-->
+
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="/js/viewJs/chat.js"></script>
     <title>{{title}}</title>
 </head>
 <body>
@@ -33,6 +33,7 @@
                     <a class="nav-link px-4" href="http://localhost:8888/{{nav.username}}/profile" style="font-size:15px">Notification</a>
 
                     <a class="nav-link px-4" href="http://localhost:8888/logout" style="font-size:15px">Logout</a>
+                    <a class="nav-link px-4" href="../chat" style="font-size: 15px">Chat</a>
 
                 {{else}}
                     <a class="nav-link px-4" href="http://localhost:8888/user/home" style="font-size:15px">Features</a>
