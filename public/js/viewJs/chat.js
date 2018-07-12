@@ -22,11 +22,12 @@ $(function() {
     socket.on('joined',(data)=>{
         data.forEach((ele)=>{
 
+            let myMsgClass=(ele.sender===splitPath[1] ? 'bg-light ' :'')
             listchats.append(
                 $(      `
-            <div class="card ${listchats} col-12">
+            <div class="card ${listchats} col-12 ${myMsgClass}">
                 <div class="card-body">
-                    <div class="card-title">sender:${ele.sender}</div>
+                    <div class="card-title">sender:<a style="color: inherit;text-decoration: none" href="../upload/${ele.sender}">${ele.sender}</a></div>
                     <div class="card-text">${ele.message}</div>
                 </div>
             </div>
@@ -34,31 +35,28 @@ $(function() {
             )
         })
     })
-    socket.on('message',(data)=>{
-        console.log(data)
-        listchats.append(
-            $(      `
-            <div class="card ${listchats} col-12">
-                <div class="card-body">
-                    <div class="card-title">sender:${data.sender}</div>
-                    <div class="card-text">${data.message}</div>
-                </div>
-            </div>
-                `)
-        )
-    })
+
     btn_send.click(()=>{
         console.log("send button clicked")
         socket.emit('discuss',{
             message:inp_msg.val(),
             room:splitPath[3]
-
         })
+        inp_msg.attr('placeholder',"Write your view here").val('')
     })
-    socket.on('chat',(data)=>{
-        console.log("in teh on chat")
-        console.log(data)
+    socket.on('message',(data)=>{
+        let myMsgClass=(data.sender===splitPath[1] ? 'bg-light' :'')
+        listchats.append(
+            $(      `
+            <div class="card ${listchats} ${myMsgClass} col-12">
+                <div class="card-body ">
+                    <div class="card-title">sender:<a style="color:inherit;text-decoration: none" href="../upload/{{ranker.2.username}}">${data.sender}</a></div>
+                    <div class="card-text">${data.message}</div>
+                </div>
+            </div>
+                `)
+        )
+
 
     })
-
 })

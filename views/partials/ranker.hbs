@@ -2,16 +2,16 @@
     <h3>
         Leader Board
     </h3>
-    <div class="row offset-1">
+    <div class="row offset-1" >
         <h5>Highest Likes on a Single Post</h5>
         <div  id="OHV">
             <div class="py-1">
-                <a href="../upload/{{ranker.0.username}}">
+                <a href="../upload/{{ranker.0.username}}" style="text-decoration: none">
                     Globally  Highest Scorer till now is  {{ranker.0.username}}
                 </a>
             </div>
             <div class="py-1">
-                <a href="../upload/{{ranker.2.username}}">
+                <a href="../upload/{{ranker.2.username}}" style="text-decoration: none">
                 In College Highest Scorer till this day is {{ranker.2.username}}
                 </a>
             </div>
@@ -20,7 +20,7 @@
             <h5>Last Week's Top Scorer</h5>
             {{# if ranker.1.username}}
                 <div class="py-1">
-                    <a href="../upload/{{ranker.1.username}}">
+                    <a href="../upload/{{ranker.1.username}}" style="text-decoration: none">
                          Globally  Highest Scorer last week is {{ranker.1.username}}
                     </a>
             </div >
@@ -31,7 +31,7 @@
             {{/if}}
             {{# if ranker.3.username}}
                 <div class="py-1">
-                    <a href="../upload/{{ranker.3.username}}">
+                    <a href="../upload/{{ranker.3.username}}" style="text-decoration: none">
                     In College Highest Scorer last week is  {{ranker.3.username}}
                     </a>
                 </div>

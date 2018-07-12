@@ -175,7 +175,9 @@ exports=module.exports={
         return Post.findOne({
             where:{
                 id:reqQuery.postId
-            }
+            },include:[{
+                model:User
+            }]
         })
     }
 }

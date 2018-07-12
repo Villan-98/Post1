@@ -61,11 +61,14 @@ route.get('/',(req,res)=>{                             //active post button is r
     }
 
 })
-route.get('/chat/:id',(req,res)=>{
+route.get('/chat/:postId',(req,res)=>{
     if(req.isAuthenticated())
     {
-        let nav=req.user
-        res.render('chat',{nav})
+        ctrl_post.getOne(req.params)
+            .then((data)=>{
+                let nav=req.user
+                res.render('chat',{nav,post:data})
+            })
     }
     else{
         res.redirect('/auth/sigin')
