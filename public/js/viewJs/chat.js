@@ -42,7 +42,7 @@ $(function() {
             message:inp_msg.val(),
             room:splitPath[3]
         })
-        inp_msg.attr('placeholder',"Write your view here").val('')
+        inp_msg.attr('placeholder',"Write your view here").val('').focus()
     })
     socket.on('message',(data)=>{
         let myMsgClass=(data.sender===splitPath[1] ? 'bg-light' :'')
